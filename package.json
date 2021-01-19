@@ -17,6 +17,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "autonumeric": "^4.6.0",
     "colyseus.js": "^0.14.1",
     "sirv-cli": "^1.0.0"
   }
