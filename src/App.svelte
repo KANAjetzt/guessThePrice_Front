@@ -4,7 +4,8 @@
   import { onMount } from "svelte";
 
   import { roomState } from "./stores";
-  import Currency from "./Currency.svelte";
+  import Currency from "./components/Currency.svelte";
+  import PlayerBoard from "./components/PlayerBoard.svelte";
 
   const client = new Colyseus.Client("ws://localhost:2567");
 
@@ -49,10 +50,12 @@
     <img src={$roomState.currentProduct.productImg} alt="product" />
     <p>{$roomState.currentProduct.productDescription}</p>
     <p>{$roomState.currentProduct.productStars}</p>
-    <p>
+    <!-- <p>
       <Currency cent={$roomState.currentProduct.productPrice} />
-    </p>
+    </p> -->
   {/if}
+
+  <PlayerBoard />
 
   <input type="text" class="guessedPriceInput" />
   <button>✔</button>
