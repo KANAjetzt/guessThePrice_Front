@@ -22,6 +22,7 @@
       <PlayerCard
         id={player[1].id}
         name={player[1].name}
+        guessedPrice={player[1].guessedPrice}
         score={player[1].score} />
     {/each}
   {/if}

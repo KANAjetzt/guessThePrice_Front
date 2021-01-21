@@ -3,9 +3,13 @@
   import AutoNumeric from "AutoNumeric";
   import { onMount } from "svelte";
 
-  import { roomState } from "./stores";
+  import { handleEuro } from "./utils/toCent";
+  import { roomStore, roomState } from "./stores";
   import Currency from "./components/Currency.svelte";
   import PlayerBoard from "./components/PlayerBoard.svelte";
+  import BtnSubmit from "./components/BtnSubmit.svelte";
+
+  let guessedPrice = 0;
 
   const client = new Colyseus.Client("ws://localhost:2567");
 
@@ -18,6 +22,11 @@
   const handleRoom = async () => {
     // join Room
     const room = await joinRoom();
+
+    console.log(room);
+
+    // store room object
+    $roomStore = room;
 
     // listen to state change
     room.onStateChange(state => {
@@ -57,6 +66,6 @@
 
   <PlayerBoard />
 
-  <input type="text" class="guessedPriceInput" />
-  <button>✔</button>
+  <input type="text" class="guessedPriceInput" bind:value={guessedPrice} />
+  <BtnSubmit guessedPrice={handleEuro(guessedPrice)} />
 </main>

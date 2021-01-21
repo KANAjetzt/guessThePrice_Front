@@ -1,7 +1,10 @@
 <script>
+  import Currency from "./Currency.svelte";
+
   export let id;
   export let name;
   export let score = 0;
+  export let guessedPrice = 0;
   // - Player Name
   // - Player Avatar (later)
   // - Guesed Price
@@ -12,5 +15,7 @@
   <p>{name}</p>
 {/if}
 
-<p>12,33€</p>
+<p>
+  <Currency cent={guessedPrice} />
+</p>
 <p>{score}</p>
