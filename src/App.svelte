@@ -8,6 +8,7 @@
   import Currency from "./components/Currency.svelte";
   import PlayerBoard from "./components/PlayerBoard.svelte";
   import BtnSubmit from "./components/BtnSubmit.svelte";
+  import Carousel from "./components/Carousel.svelte";
 
   let guessedPrice = 0;
 
@@ -22,8 +23,6 @@
   const handleRoom = async () => {
     // join Room
     const room = await joinRoom();
-
-    console.log(room);
 
     // store room object
     $roomStore = room;
@@ -55,13 +54,34 @@
 
 <main>
   {#if $roomState}
-    <h2>{$roomState.currentProduct.productTitle}</h2>
-    <img src={$roomState.currentProduct.productImg} alt="product" />
-    <p>{$roomState.currentProduct.productDescription}</p>
-    <p>{$roomState.currentProduct.productStars}</p>
-    <!-- <p>
-      <Currency cent={$roomState.currentProduct.productPrice} />
-    </p> -->
+    <!-- Title -->
+    <h2>{$roomState.currentProduct.title}</h2>
+
+    <!-- Images -->
+    <Carousel
+      imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]} />
+
+    <!-- Feature Bullets -->
+    {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
+      <p>{feature[1]}</p>
+    {/each}
+
+    <!-- Description -->
+    <p>{$roomState.currentProduct.description}</p>
+    <!-- Technical Details -->
+
+    {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
+      <p>{technicalDetail.join(': ')}</p>
+    {/each}
+
+    <!-- Rating Count -->
+    <p>{$roomState.currentProduct.ratingCount}</p>
+    <!-- Rating Stars -->
+    <p>{$roomState.currentProduct.ratingStars}</p>
+    <!-- Creation Date -->
+    <p>
+      Stand: {new Date($roomState.currentProduct.creationDate).toLocaleDateString('de-DE')}
+    </p>
   {/if}
 
   <PlayerBoard />

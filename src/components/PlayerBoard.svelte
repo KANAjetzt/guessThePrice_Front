@@ -3,10 +3,7 @@
   import PlayerCard from "./PlayerCard.svelte";
 
   $: if ($roomState) {
-    console.log($roomState.playerStates.$items);
-    $roomState.playerStates.$items.forEach(e => {
-      console.log(e);
-    });
+    $roomState.playerStates.$items.forEach(e => {});
   }
 </script>
 

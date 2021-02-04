@@ -5,8 +5,6 @@
 
   const handleClick = e => {
     // send guessed price to BE
-    console.log("guessed a Price!");
-    console.log(guessedPrice);
     $roomStore.send("guessedPrice", { guessedPrice });
   };
 </script>
