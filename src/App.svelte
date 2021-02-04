@@ -69,11 +69,11 @@
     <!-- Description -->
     <p>{$roomState.currentProduct.description}</p>
     <!-- Technical Details -->
-
-    {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
-      <p>{technicalDetail.join(': ')}</p>
-    {/each}
-
+    {#if $roomState.currentProduct.technicalDetails}
+      {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
+        <p>{technicalDetail.join(': ')}</p>
+      {/each}
+    {/if}
     <!-- Rating Count -->
     <p>{$roomState.currentProduct.ratingCount}</p>
     <!-- Rating Stars -->
