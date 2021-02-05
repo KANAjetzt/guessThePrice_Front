@@ -75,9 +75,9 @@
       {/each}
     {/if}
     <!-- Rating Count -->
-    <p>{$roomState.currentProduct.ratingCount}</p>
+    <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
     <!-- Rating Stars -->
-    <p>{$roomState.currentProduct.ratingStars}</p>
+    <p>{$roomState.currentProduct.ratingStars} Sternen</p>
     <!-- Creation Date -->
     <p>
       Stand: {new Date($roomState.currentProduct.creationDate).toLocaleDateString('de-DE')}
