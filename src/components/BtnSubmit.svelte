@@ -1,11 +1,13 @@
 <script>
-  import { roomStore } from "../stores";
+  import { roomStore, appStore } from "../stores";
 
-  export let guessedPrice = 0;
-
-  const handleClick = e => {
-    // send guessed price to BE
-    $roomStore.send("guessedPrice", { guessedPrice });
+  const handleClick = async (e) => {
+    // Send guessed price to BE
+    await $roomStore.send("guessedPrice", {
+      guessedPrice: parseInt($appStore.guessedPrice.match(/\d/g).join("")),
+    });
+    // Reset guessed price input
+    $appStore.guessedPrice = "0.00";
   };
 </script>
 

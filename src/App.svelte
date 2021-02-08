@@ -4,15 +4,14 @@
   import { onMount } from "svelte";
 
   import { handleEuro } from "./utils/toCent";
-  import { roomStore, roomState } from "./stores";
+  import { roomStore, roomState, appStore } from "./stores";
   import Currency from "./components/Currency.svelte";
   import PlayerBoard from "./components/PlayerBoard.svelte";
   import BtnSubmit from "./components/BtnSubmit.svelte";
   import Carousel from "./components/Carousel.svelte";
+  import PlayerCard from "./components/PlayerCard.svelte";
 
-  let guessedPrice = 0;
-
-  const client = new Colyseus.Client("ws://localhost:2567");
+  const client = new Colyseus.Client("ws://192.168.178.34:2567");
 
   const joinRoom = async () => {
     const room = await client.joinOrCreate("my_room");
@@ -28,64 +27,81 @@
     $roomStore = room;
 
     // listen to state change
-    room.onStateChange(state => {
+    room.onStateChange((state) => {
       $roomState = state;
       console.log($roomState);
     });
   };
 
-  onMount(() => {
-    // Add formating to currency input
-    new AutoNumeric(".guessedPriceInput", {
-      currencySymbol: "€",
-      currencySymbolPlacement: "s"
-    });
+  $: if ($roomState) {
+    if (!$appStore.isAutoNumericOn) {
+      // Add formating to currency input
+      setTimeout(() => {
+        new AutoNumeric(".guessedPriceInput", {
+          currencySymbol: "€",
+          currencySymbolPlacement: "s",
+        });
+      }, 1000);
+      $appStore.isAutoNumericOn = true;
+    }
+  }
 
+  onMount(async () => {
     // Connect to game room and listen for state change
-    handleRoom();
+    await handleRoom();
   });
 </script>
+
+<main>
+  {#if $roomState}
+    {#if !$roomState.gameEnded}
+      <!-- Title -->
+      <h2>{$roomState.currentProduct.title}</h2>
+
+      <!-- Images -->
+      <Carousel
+        imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]}
+      />
+
+      <!-- Feature Bullets -->
+      {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
+        <p>{feature[1]}</p>
+      {/each}
+
+      <!-- Description -->
+      <p>{$roomState.currentProduct.description}</p>
+      <!-- Technical Details -->
+      {#if $roomState.currentProduct.technicalDetails}
+        {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
+          <p>{technicalDetail.join(": ")}</p>
+        {/each}
+      {/if}
+      <!-- Rating Count -->
+      <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
+      <!-- Rating Stars -->
+      <p>{$roomState.currentProduct.ratingStars} Sternen</p>
+      <!-- Creation Date -->
+      <p>
+        Stand: {new Date(
+          $roomState.currentProduct.creationDate
+        ).toLocaleDateString("de-DE")}
+      </p>
+
+      <input
+        style={``}
+        type="text"
+        class="guessedPriceInput"
+        bind:value={$appStore.guessedPrice}
+      />
+      <BtnSubmit guessedPrice={handleEuro($appStore.guessedPrice)} />
+    {/if}
+  {/if}
+
+  <PlayerBoard />
+</main>
 
 <style>
   img {
     max-width: 100vw;
   }
 </style>
-
-<main>
-  {#if $roomState}
-    <!-- Title -->
-    <h2>{$roomState.currentProduct.title}</h2>
-
-    <!-- Images -->
-    <Carousel
-      imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]} />
-
-    <!-- Feature Bullets -->
-    {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
-      <p>{feature[1]}</p>
-    {/each}
-
-    <!-- Description -->
-    <p>{$roomState.currentProduct.description}</p>
-    <!-- Technical Details -->
-    {#if $roomState.currentProduct.technicalDetails}
-      {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
-        <p>{technicalDetail.join(': ')}</p>
-      {/each}
-    {/if}
-    <!-- Rating Count -->
-    <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
-    <!-- Rating Stars -->
-    <p>{$roomState.currentProduct.ratingStars} Sternen</p>
-    <!-- Creation Date -->
-    <p>
-      Stand: {new Date($roomState.currentProduct.creationDate).toLocaleDateString('de-DE')}
-    </p>
-  {/if}
-
-  <PlayerBoard />
-
-  <input type="text" class="guessedPriceInput" bind:value={guessedPrice} />
-  <BtnSubmit guessedPrice={handleEuro(guessedPrice)} />
-</main>
