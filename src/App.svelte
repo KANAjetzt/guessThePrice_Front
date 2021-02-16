@@ -2,13 +2,14 @@
   import * as Colyseus from "colyseus.js";
   import AutoNumeric from "AutoNumeric";
   import { onMount } from "svelte";
+  import Carousel from "@beyonk/svelte-carousel";
+  import { ChevronLeftIcon, ChevronRightIcon } from "svelte-feather-icons";
 
   import { handleEuro } from "./utils/toCent";
   import { roomStore, roomState, appStore } from "./stores";
   import Currency from "./components/Currency.svelte";
   import PlayerBoard from "./components/PlayerBoard.svelte";
   import BtnSubmit from "./components/BtnSubmit.svelte";
-  import Carousel from "./components/Carousel.svelte";
   import PlayerCard from "./components/PlayerCard.svelte";
 
   const client = new Colyseus.Client("ws://192.168.178.34:2567");
@@ -59,9 +60,25 @@
       <h2>{$roomState.currentProduct.title}</h2>
 
       <!-- Images -->
-      <Carousel
+      {#if [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs][0]}
+        <Carousel perPage={1}>
+          <span class="control" slot="left-control">
+            <ChevronLeftIcon />
+          </span>
+          {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as img}
+            <div class="slide-content">
+              <img src={img} alt="adding that later" />
+            </div>
+          {/each}
+          <span class="control" slot="right-control">
+            <ChevronRightIcon />
+          </span>
+        </Carousel>
+      {/if}
+
+      <!-- <Carousel
         imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]}
-      />
+      /> -->
 
       <!-- Feature Bullets -->
       {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
