@@ -121,4 +121,10 @@
   img {
     max-width: 100vw;
   }
+
+  .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
