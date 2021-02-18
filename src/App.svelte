@@ -47,7 +47,9 @@
       <h2>{$roomState.currentProduct.title}</h2>
 
       <!-- Images -->
-      <Carousel />
+      {#if [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs][0]}
+        <Carousel />
+      {/if}
 
       <!-- Feature Bullets -->
       {#each [...$roomState.currentProduct.featureBullets.$items] as feature}

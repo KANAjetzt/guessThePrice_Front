@@ -5,7 +5,7 @@
   import { roomState } from "../stores";
 </script>
 
-{#if [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs][0]}
+<div>
   <Carousel perPage={1}>
     <span class="control" slot="left-control">
       <ChevronLeftIcon />
@@ -19,7 +19,7 @@
       <ChevronRightIcon />
     </span>
   </Carousel>
-{/if}
+</div>
 
 <style>
   img {

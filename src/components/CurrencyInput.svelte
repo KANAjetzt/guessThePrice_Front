@@ -18,7 +18,6 @@
   type="text"
   class="guessedPriceInput"
   on:autoNumeric:formatted={(e) => {
-    console.log(e.detail);
     $appStore.guessedPrice = e.detail.newValue;
   }}
   bind:value={$appStore.guessedPrice}
