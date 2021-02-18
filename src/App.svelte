@@ -1,9 +1,7 @@
 <script>
   import * as Colyseus from "colyseus.js";
-  import AutoNumeric from "AutoNumeric";
+
   import { onMount } from "svelte";
-  import Carousel from "@beyonk/svelte-carousel";
-  import { ChevronLeftIcon, ChevronRightIcon } from "svelte-feather-icons";
 
   import { handleEuro } from "./utils/toCent";
   import { roomStore, roomState, appStore } from "./stores";
@@ -11,6 +9,8 @@
   import PlayerBoard from "./components/PlayerBoard.svelte";
   import BtnSubmit from "./components/BtnSubmit.svelte";
   import PlayerCard from "./components/PlayerCard.svelte";
+  import Carousel from "./components/Carousel.svelte";
+  import CurrencyInput from "./components/CurrencyInput.svelte";
 
   const client = new Colyseus.Client("ws://192.168.178.34:2567");
 
@@ -34,19 +34,6 @@
     });
   };
 
-  $: if ($roomState) {
-    if (!$appStore.isAutoNumericOn) {
-      // Add formating to currency input
-      setTimeout(() => {
-        new AutoNumeric(".guessedPriceInput", {
-          currencySymbol: "€",
-          currencySymbolPlacement: "s",
-        });
-      }, 1000);
-      $appStore.isAutoNumericOn = true;
-    }
-  }
-
   onMount(async () => {
     // Connect to game room and listen for state change
     await handleRoom();
@@ -60,25 +47,7 @@
       <h2>{$roomState.currentProduct.title}</h2>
 
       <!-- Images -->
-      {#if [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs][0]}
-        <Carousel perPage={1}>
-          <span class="control" slot="left-control">
-            <ChevronLeftIcon />
-          </span>
-          {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as img}
-            <div class="slide-content">
-              <img src={img} alt="adding that later" />
-            </div>
-          {/each}
-          <span class="control" slot="right-control">
-            <ChevronRightIcon />
-          </span>
-        </Carousel>
-      {/if}
-
-      <!-- <Carousel
-        imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]}
-      /> -->
+      <Carousel />
 
       <!-- Feature Bullets -->
       {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
@@ -103,13 +72,7 @@
           $roomState.currentProduct.creationDate
         ).toLocaleDateString("de-DE")}
       </p>
-
-      <input
-        style={``}
-        type="text"
-        class="guessedPriceInput"
-        bind:value={$appStore.guessedPrice}
-      />
+      <CurrencyInput />
       <BtnSubmit guessedPrice={handleEuro($appStore.guessedPrice)} />
     {/if}
   {/if}
@@ -118,13 +81,4 @@
 </main>
 
 <style>
-  img {
-    max-width: 100vw;
-  }
-
-  .slide-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 </style>
