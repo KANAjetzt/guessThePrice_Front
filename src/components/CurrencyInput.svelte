@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import AutoNumeric from "AutoNumeric";
+  import AutoNumeric from "autonumeric";
   import { appStore } from "../stores";
 
   onMount(() => {
