@@ -5,10 +5,8 @@
 
   import { handleEuro } from "./utils/toCent";
   import { roomStore, roomState, appStore } from "./stores";
-  import Currency from "./components/Currency.svelte";
   import PlayerBoard from "./components/PlayerBoard.svelte";
   import BtnSubmit from "./components/BtnSubmit.svelte";
-  import PlayerCard from "./components/PlayerCard.svelte";
   import Carousel from "./components/Carousel.svelte";
   import CurrencyInput from "./components/CurrencyInput.svelte";
 
@@ -47,9 +45,9 @@
       <h2>{$roomState.currentProduct.title}</h2>
 
       <!-- Images -->
-      {#if [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs][0]}
-        <Carousel />
-      {/if}
+      <Carousel
+        imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]}
+      />
 
       <!-- Feature Bullets -->
       {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
