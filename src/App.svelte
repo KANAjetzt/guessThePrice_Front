@@ -10,7 +10,7 @@
   import Carousel from "./components/Carousel.svelte";
   import CurrencyInput from "./components/CurrencyInput.svelte";
 
-  const client = new Colyseus.Client("ws://guessthepricegame.herokuapp.com/");
+  const client = new Colyseus.Client("wss://guessthepricegame.herokuapp.com/");
 
   const joinRoom = async () => {
     const room = await client.joinOrCreate("my_room");
