@@ -4,6 +4,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
+import replace from "@rollup/plugin-replace";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -44,6 +45,15 @@ export default {
     file: "public/build/bundle.js",
   },
   plugins: [
+    replace({
+      // 2 level deep object should be stringify
+      svelteEnv: JSON.stringify({
+        isProd: production,
+        BackendUrl: production
+          ? "wss://guessthepricegame.herokuapp.com/"
+          : "ws://192.168.178.34:2567",
+      }),
+    }),
     svelte({
       compilerOptions: {
         // enable run-time checks when not in production
