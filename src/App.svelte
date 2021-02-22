@@ -3,7 +3,6 @@
 
   import { onMount } from "svelte";
 
-  import { handleEuro } from "./utils/toCent";
   import { roomStore, roomState, appStore } from "./stores";
   import PlayerBoard from "./components/PlayerBoard.svelte";
   import BtnSubmit from "./components/BtnSubmit.svelte";
@@ -89,7 +88,9 @@
         ).toLocaleDateString("de-DE")}
       </p>
       <CurrencyInput />
-      <BtnSubmit guessedPrice={handleEuro($appStore.guessedPrice)} />
+      {#if $appStore.guessedPrice}
+        <BtnSubmit />
+      {/if}
     {/if}
   {/if}
 
