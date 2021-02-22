@@ -10,12 +10,19 @@
   import Carousel from "./components/Carousel.svelte";
   import CurrencyInput from "./components/CurrencyInput.svelte";
 
-  const client = new Colyseus.Client("wss://guessthepricegame.herokuapp.com/");
+  const client = new Colyseus.Client(svelteEnv.BackendUrl);
 
   const joinRoom = async () => {
     const room = await client.joinOrCreate("my_room");
     console.log(room.sessionId, "joined", room.name);
     return room;
+  };
+
+  // Keep's the ws connection alive on heroku (pings every 30s)
+  // https://devcenter.heroku.com/articles/websockets#timeouts
+  const pingPong = async () => {
+    // Send ping to server
+    await $roomStore.send("alivePing");
   };
 
   const handleRoom = async () => {
@@ -25,10 +32,19 @@
     // store room object
     $roomStore = room;
 
+    // start ping pong
+    pingPong();
+
     // listen to state change
     room.onStateChange((state) => {
       $roomState = state;
       console.log($roomState);
+    });
+
+    // listen to alivePong
+    room.onMessage("alivePong", () => {
+      // send alivePing back
+      pingPong();
     });
   };
 
