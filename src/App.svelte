@@ -18,6 +18,13 @@
     return room;
   };
 
+  // Keep's the ws connection alive on heroku (pings every 30s)
+  // https://devcenter.heroku.com/articles/websockets#timeouts
+  const pingPong = async () => {
+    // Send ping to server
+    await $roomStore.send("alivePing");
+  };
+
   const handleRoom = async () => {
     // join Room
     const room = await joinRoom();
@@ -25,10 +32,19 @@
     // store room object
     $roomStore = room;
 
+    // start ping pong
+    pingPong();
+
     // listen to state change
     room.onStateChange((state) => {
       $roomState = state;
       console.log($roomState);
+    });
+
+    // listen to alivePong
+    room.onMessage("alivePong", () => {
+      // send alivePing back
+      pingPong();
     });
   };
 
