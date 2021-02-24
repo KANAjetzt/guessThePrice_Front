@@ -4,7 +4,7 @@
   const handleClick = async (e) => {
     // Send guessed price to BE
     await $roomStore.send("guessedPrice", {
-      guessedPrice: parseInt($appStore.guessedPrice.match(/\d/g).join("")),
+      guessedPrice: $appStore.guessedPrice,
     });
   };
 </script>

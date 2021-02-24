@@ -8,6 +8,10 @@
   import BtnSubmit from "./components/BtnSubmit.svelte";
   import Carousel from "./components/Carousel.svelte";
   import CurrencyInput from "./components/CurrencyInput.svelte";
+  import Gallery from "./components/Gallery.svelte";
+
+  let clientWidth;
+  $: $appStore.clientWidth = clientWidth;
 
   const client = new Colyseus.Client(svelteEnv.BackendUrl);
 
@@ -53,6 +57,8 @@
   });
 </script>
 
+<svelte:window bind:innerWidth={clientWidth} />
+
 <main>
   {#if $roomState}
     {#if !$roomState.gameEnded}
@@ -60,9 +66,17 @@
       <h2>{$roomState.currentProduct.title}</h2>
 
       <!-- Images -->
-      <Carousel
-        imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]}
-      />
+      {#if $appStore.clientWidth > 535}
+        <Gallery>
+          {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as src, i}
+            <img {src} alt={`Productbild-${i}`} />
+          {/each}
+        </Gallery>
+      {:else}
+        <Carousel
+          imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]}
+        />
+      {/if}
 
       <!-- Feature Bullets -->
       {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
