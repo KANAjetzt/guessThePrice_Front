@@ -9,6 +9,7 @@
   import Carousel from "./components/Carousel.svelte";
   import CurrencyInput from "./components/CurrencyInput.svelte";
   import Gallery from "./components/Gallery.svelte";
+  import BetweenRounds from "./components/BetweenRounds.svelte";
 
   let clientWidth;
   $: $appStore.clientWidth = clientWidth;
@@ -61,7 +62,7 @@
 
 <main>
   {#if $roomState}
-    {#if !$roomState.gameEnded}
+    {#if !$roomState.gameEnded && !$roomState.isBetweenRounds}
       <!-- Title -->
       <h2>{$roomState.currentProduct.title}</h2>
 
@@ -105,10 +106,17 @@
       {#if $appStore.guessedPrice}
         <BtnSubmit />
       {/if}
+      <PlayerBoard />
+    {/if}
+
+    {#if $roomState.isBetweenRounds}
+      <BetweenRounds />
+    {/if}
+
+    {#if $roomState.gameEnded}
+      <PlayerBoard />
     {/if}
   {/if}
-
-  <PlayerBoard />
 </main>
 
 <style>
