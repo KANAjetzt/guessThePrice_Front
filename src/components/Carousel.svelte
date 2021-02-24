@@ -1,42 +1,38 @@
 <script>
-  import { onMount } from "svelte";
-  import { fade } from "svelte/transition";
+  import Carousel from "@beyonk/svelte-carousel";
+  import { ChevronLeftIcon, ChevronRightIcon } from "svelte-feather-icons";
 
-  export let imgs = [];
-
-  let currentImgIndex = 0;
-
-  const cycleImgs = (seconds) => {
-    setInterval(() => {
-      currentImgIndex = (currentImgIndex + 1) % imgs.length;
-    }, seconds * 1000);
-  };
-
-  onMount(() => {
-    cycleImgs(2);
-  });
+  import { roomState } from "../stores";
 </script>
 
-<div class="imgs">
-  {#each [imgs[currentImgIndex]] as img, index (currentImgIndex)}
-    <img transition:fade class="img" src={img} alt={`Product`} />
-  {/each}
+<div>
+  {#if [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs][0]}
+    <Carousel perPage={1}>
+      <span class="control" slot="left-control">
+        <ChevronLeftIcon />
+      </span>
+      {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as img}
+        {#if img}
+          <div class="slide-content">
+            <img src={img} alt="adding that later" />
+          </div>
+        {/if}
+      {/each}
+      <span class="control" slot="right-control">
+        <ChevronRightIcon />
+      </span>
+    </Carousel>
+  {/if}
 </div>
 
 <style>
-  .imgs {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    position: relative;
-    width: 100%;
+  img {
+    max-width: 100vw;
   }
 
-  .img {
-    width: 100%;
-    height: 20rem;
-    grid-row: 1 / 2;
-    grid-column: 1 / 2;
-    object-fit: cover;
+  .slide-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

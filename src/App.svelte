@@ -10,6 +10,7 @@
   import CurrencyInput from "./components/CurrencyInput.svelte";
   import Gallery from "./components/Gallery.svelte";
   import BetweenRounds from "./components/BetweenRounds.svelte";
+  import GameEnd from "./components/GameEnd.svelte";
 
   let clientWidth;
   $: $appStore.clientWidth = clientWidth;
@@ -74,9 +75,7 @@
           {/each}
         </Gallery>
       {:else}
-        <Carousel
-          imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]}
-        />
+        <Carousel />
       {/if}
 
       <!-- Feature Bullets -->
@@ -114,7 +113,7 @@
     {/if}
 
     {#if $roomState.gameEnded}
-      <PlayerBoard />
+      <GameEnd />
     {/if}
   {/if}
 </main>
