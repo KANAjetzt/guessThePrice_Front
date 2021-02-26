@@ -9,16 +9,34 @@
       currencySymbolPlacement: "s",
       decimalPlaces: 2,
       minimumValue: 0,
+      decimalCharacter: ",",
+      decimalCharacterAlternative: ",",
+      digitGroupSeparator: "'",
     });
   });
 </script>
 
-<input
-  style={``}
-  type="text"
-  class="guessedPriceInput"
-  on:autoNumeric:formatted={(e) => {
-    $appStore.guessedPrice = e.detail.newValue;
-  }}
-  bind:value={$appStore.guessedPrice}
-/>
+<div class="currencyInput">
+  <p>Geschätzter Preis:</p>
+  <input
+    style={``}
+    type="text"
+    class="guessedPriceInput"
+    placeholder="0€"
+    on:autoNumeric:formatted={(e) => {
+      const numbers = e.detail.newValue.match(/\d/g);
+      if (numbers && typeof e.detail.newValue === "string") {
+        $appStore.guessedPrice = parseInt(numbers.join(""));
+      } else {
+        $appStore.guessedPrice = 0;
+      }
+    }}
+  />
+</div>
+
+<style>
+  .currencyInput {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

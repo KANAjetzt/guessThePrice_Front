@@ -7,4 +7,5 @@ export const roomStore = writable();
 export const appStore = writable({
   guessedPrice: 0,
   isAutoNumericOn: false,
+  clientWidth: undefined,
 });

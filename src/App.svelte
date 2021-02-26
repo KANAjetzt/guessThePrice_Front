@@ -3,12 +3,17 @@
 
   import { onMount } from "svelte";
 
-  import { handleEuro } from "./utils/toCent";
   import { roomStore, roomState, appStore } from "./stores";
   import PlayerBoard from "./components/PlayerBoard.svelte";
   import BtnSubmit from "./components/BtnSubmit.svelte";
   import Carousel from "./components/Carousel.svelte";
   import CurrencyInput from "./components/CurrencyInput.svelte";
+  import Gallery from "./components/Gallery.svelte";
+  import BetweenRounds from "./components/BetweenRounds.svelte";
+  import GameEnd from "./components/GameEnd.svelte";
+
+  let clientWidth;
+  $: $appStore.clientWidth = clientWidth;
 
   const client = new Colyseus.Client(svelteEnv.BackendUrl);
 
@@ -54,16 +59,24 @@
   });
 </script>
 
+<svelte:window bind:innerWidth={clientWidth} />
+
 <main>
   {#if $roomState}
-    {#if !$roomState.gameEnded}
+    {#if !$roomState.gameEnded && !$roomState.isBetweenRounds}
       <!-- Title -->
       <h2>{$roomState.currentProduct.title}</h2>
 
       <!-- Images -->
-      <Carousel
-        imgs={[...$roomState.currentProduct.imgs.$items.get(0).mediumImgs]}
-      />
+      {#if $appStore.clientWidth > 535}
+        <Gallery>
+          {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as src, i}
+            <img {src} alt={`Productbild-${i}`} />
+          {/each}
+        </Gallery>
+      {:else}
+        <Carousel />
+      {/if}
 
       <!-- Feature Bullets -->
       {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
@@ -89,11 +102,20 @@
         ).toLocaleDateString("de-DE")}
       </p>
       <CurrencyInput />
-      <BtnSubmit guessedPrice={handleEuro($appStore.guessedPrice)} />
+      {#if $appStore.guessedPrice}
+        <BtnSubmit />
+      {/if}
+      <PlayerBoard />
+    {/if}
+
+    {#if $roomState.isBetweenRounds}
+      <BetweenRounds />
+    {/if}
+
+    {#if $roomState.gameEnded}
+      <GameEnd />
     {/if}
   {/if}
-
-  <PlayerBoard />
 </main>
 
 <style>

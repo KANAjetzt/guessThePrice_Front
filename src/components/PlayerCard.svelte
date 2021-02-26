@@ -1,8 +1,8 @@
 <script>
   import Currency from "./Currency.svelte";
 
-  export let id;
   export let name;
+  export let roundScore = 0;
   export let score = 0;
   export let guessedPrice = 0;
   // - Player Name
@@ -18,4 +18,15 @@
 <p>
   <Currency cent={guessedPrice} />
 </p>
-<p>{score}</p>
+<p>
+  {score}
+  {#if roundScore !== 0}
+    <span class="roundScore"> +{roundScore}</span>
+  {/if}
+</p>
+
+<style>
+  .roundScore {
+    color: green;
+  }
+</style>
