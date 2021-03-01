@@ -1,11 +1,14 @@
 <script>
-  import { roomState } from "../stores.js";
+  import { onMount } from "svelte";
+  import { roomState, lobbyState, appStore } from "../stores.js";
   import PlayerCard from "./PlayerCard.svelte";
+
+  export let store;
 </script>
 
 <div class="playerBoard">
-  {#if $roomState}
-    {#each [...$roomState.playerStates.$items] as player}
+  {#if $store}
+    {#each [...$store.playerStates.$items] as player}
       <PlayerCard
         name={player[1].name}
         roundScore={player[1].roundScore}
