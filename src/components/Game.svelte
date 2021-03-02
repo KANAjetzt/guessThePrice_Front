@@ -14,48 +14,9 @@
   let clientWidth;
   $: $appStore.clientWidth = clientWidth;
 
-  const joinRoom = async () => {
-    const room = await client.joinOrCreate("my_room");
-    console.log(room.sessionId, "joined", room.name);
-    return room;
-  };
-
-  // Keep's the ws connection alive on heroku (pings every 30s)
-  // https://devcenter.heroku.com/articles/websockets#timeouts
-  const pingPong = async () => {
-    // Send ping to server
-    await $roomStore.send("alivePing");
-  };
-
-  const handleRoom = async () => {
-    // join Room
-    const room = await joinRoom();
-
-    // store room object
-    $roomStore = room;
-
-    // start ping pong
-    pingPong();
-
-    // listen to state change
-    room.onStateChange((state) => {
-      $roomState = state;
-      console.log($roomState);
-    });
-
-    // listen to alivePong
-    room.onMessage("alivePong", () => {
-      // send alivePing back
-      pingPong();
-    });
-  };
-
-  onMount(async () => {
+  onMount(() => {
     // Update currentRoom in appStore so everyone knows
     $appStore.currentRoom = "game";
-
-    // Connect to game room and listen for state change
-    await handleRoom();
   });
 </script>
 
