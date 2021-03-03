@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from "svelte";
-  import { roomState, lobbyState, appStore } from "../stores.js";
   import PlayerCard from "./PlayerCard.svelte";
 
   export let store;
@@ -11,6 +9,7 @@
     {#each [...$store.playerStates.$items] as player}
       <PlayerCard
         name={player[1].name}
+        avatar={player[1].avatar}
         roundScore={player[1].roundScore}
         guessedPrice={player[1].guessedPrice}
         score={player[1].score}

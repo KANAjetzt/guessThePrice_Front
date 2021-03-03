@@ -7,6 +7,13 @@
 
   const client = new Colyseus.Client(svelteEnv.BackendUrl);
 
+  // Switch view if game has started
+  $: if ($roomState) {
+    if ($roomState.gameStarted) {
+      $appStore.currentRoom = "game";
+    }
+  }
+
   const joinRoom = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const roomId = urlParams.get("c");
@@ -16,10 +23,10 @@
     // Check if roomId is in URL --> /?c=1f0bbd3c1
     if (roomId) {
       console.log("joining Room");
-      room = await client.joinById(roomId);
+      room = await client.joinById(roomId);      
     } else {
       console.log("creating Room");
-      room = await client.create("my_room");
+      room = await client.create("my_room");      
     }
 
     return room;
@@ -35,6 +42,7 @@
   const handleRoom = async () => {
     // join Room
     const room = await joinRoom();
+    console.log(room.sessionId, "joined", room.name);
 
     // store room object
     $roomStore = room;
@@ -63,9 +71,9 @@
 
 {#if client}
   {#if $appStore.currentRoom === "game"}
-    <Game {client} />
+    <Game />
   {/if}
   {#if $appStore.currentRoom === "lobby"}
-    <Lobby {client} />
+    <Lobby />
   {/if}
 {/if}

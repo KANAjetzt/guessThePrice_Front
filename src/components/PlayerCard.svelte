@@ -10,6 +10,7 @@
   import Currency from "./Currency.svelte";
 
   export let name;
+  export let avatar;
   export let roundScore = 0;
   export let score = 0;
   export let guessedPrice = 0;
@@ -23,6 +24,8 @@
 
   $: tweenedScore.set(score);
 </script>
+
+<img src={avatar} alt="" />
 
 {#if name}
   <p>{name}</p>

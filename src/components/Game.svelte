@@ -9,8 +9,6 @@
   import BetweenRounds from "./BetweenRounds.svelte";
   import GameEnd from "./GameEnd.svelte";
 
-  export let client;
-
   let clientWidth;
   $: $appStore.clientWidth = clientWidth;
 
