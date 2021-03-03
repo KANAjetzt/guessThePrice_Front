@@ -9,6 +9,13 @@
   import BetweenRounds from "./BetweenRounds.svelte";
   import GameEnd from "./GameEnd.svelte";
 
+  const handleGuessedPriceSubmit = async (e) => {
+    // Send guessed price to BE
+    await $roomStore.send("guessedPrice", {
+      guessedPrice: $appStore.guessedPrice,
+    });
+  };
+
   let clientWidth;
   $: $appStore.clientWidth = clientWidth;
 
@@ -62,7 +69,7 @@
       </p>
       <CurrencyInput />
       {#if $appStore.guessedPrice}
-        <BtnSubmit />
+        <BtnSubmit on:click={handleGuessedPriceSubmit} />
       {/if}
       <PlayerBoard store={roomState} />
     {/if}

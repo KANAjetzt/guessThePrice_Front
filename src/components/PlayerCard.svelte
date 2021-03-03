@@ -25,32 +25,47 @@
   $: tweenedScore.set(score);
 </script>
 
-<img src={avatar} alt="" />
+<div class="playerCard">
+  <img class="avatar" src={avatar} alt="" />
 
-{#if name}
-  <p>{name}</p>
-{/if}
+  <div class="info">
+    {#if name}
+      <p>{name}</p>
+    {/if}
 
-<p>
-  <Currency cent={guessedPrice} />
-</p>
-<p>
-  {Math.floor($tweenedScore)}
-  {#if roundScore !== 0 && showRoundScore}
-    <span
-      class="roundScore"
-      in:fade={{ duration: 300 }}
-      out:fly={{ duration: 1500, delay: 2000, x: -30 }}
-      on:introend={() => {
-        showRoundScore = false;
-      }}
-    >
-      +{roundScore}</span
-    >
-  {/if}
-</p>
+    <p>
+      <Currency cent={guessedPrice} />
+    </p>
+    <p>
+      {Math.floor($tweenedScore)}
+      {#if roundScore !== 0 && showRoundScore}
+        <span
+          class="roundScore"
+          in:fade={{ duration: 300 }}
+          out:fly={{ duration: 1500, delay: 2000, x: -30 }}
+          on:introend={() => {
+            showRoundScore = false;
+          }}
+        >
+          +{roundScore}</span
+        >
+      {/if}
+    </p>
+  </div>
+</div>
 
 <style>
+  .playerCard {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+  }
+
+  .avatar {
+    grid-column: 1 / 2;
+  }
+  .info {
+    grid-column: 2 / 3;
+  }
   .roundScore {
     display: inline-block;
     color: green;
