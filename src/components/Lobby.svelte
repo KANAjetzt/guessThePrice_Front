@@ -21,7 +21,7 @@
 
   <button class="startBtn" on:click={startGame}> Play! </button>
 
-  <PlayerBoard store={roomState} />
+  <PlayerBoard />
 {:else}
   <p>loading...</p>
 {/if}

@@ -23,10 +23,10 @@
     // Check if roomId is in URL --> /?c=1f0bbd3c1
     if (roomId) {
       console.log("joining Room");
-      room = await client.joinById(roomId);      
+      room = await client.joinById(roomId);
     } else {
       console.log("creating Room");
-      room = await client.create("my_room");      
+      room = await client.create("my_room");
     }
 
     return room;

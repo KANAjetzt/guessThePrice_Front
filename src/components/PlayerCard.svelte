@@ -60,6 +60,7 @@
     grid-template-columns: min-content 1fr;
     align-items: center;
     gap: 1rem;
+    padding: 1rem;
   }
 
   .avatar {

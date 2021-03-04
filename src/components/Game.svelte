@@ -74,7 +74,7 @@
       <PlayerBoard store={roomState} />
     {/if}
 
-    {#if $roomState.isBetweenRounds}
+    {#if !$roomState.isBetweenRounds}
       <BetweenRounds />
     {/if}
 
