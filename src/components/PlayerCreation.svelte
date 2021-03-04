@@ -33,5 +33,6 @@
 
   img {
     max-width: 10rem;
+    padding: 1rem;
   }
 </style>

@@ -57,11 +57,15 @@
 <style>
   .playerCard {
     display: grid;
-    grid-template-columns: 10rem 1fr;
+    grid-template-columns: min-content 1fr;
+    align-items: center;
+    gap: 1rem;
   }
 
   .avatar {
     grid-column: 1 / 2;
+    max-width: 6rem;
+    padding: 2rem;
   }
   .info {
     grid-column: 2 / 3;

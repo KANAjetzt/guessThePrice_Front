@@ -1,13 +1,8 @@
 <script>
   import { roomState, roomStore, appStore } from "../stores";
   import PlayerCreation from "./PlayerCreation.svelte";
+  import InviteLinkBtn from "./BtnInviteLink.svelte";
   import PlayerBoard from "./PlayerBoard.svelte";
-
-  let lobbyUrl;
-
-  $: if ($roomState) {
-    lobbyUrl = `${window.location.host}/?c=${$roomStore.id}`;
-  }
 
   const startGame = async () => {
     console.log("starting Game!");
@@ -16,14 +11,34 @@
 </script>
 
 {#if $roomState}
-  <button on:click={startGame}> Play! </button>
+  <div class="inviteLink">
+    <InviteLinkBtn />
+  </div>
 
-  <label for="lobbyUrl">Invite Link</label>
-  <input name="lobbyUrl" id="lobbyUrl" type="text" bind:value={lobbyUrl} />
+  <div class="playerCreation">
+    <PlayerCreation />
+  </div>
 
-  <PlayerCreation />
+  <button class="startBtn" on:click={startGame}> Play! </button>
 
   <PlayerBoard store={roomState} />
 {:else}
   <p>loading...</p>
 {/if}
+
+<style>
+  .inviteLink {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  .playerCreation {
+    padding: 2rem;
+  }
+  .startBtn {
+    font-weight: 700;
+    display: block;
+    margin: 2rem auto 2rem auto;
+    padding: 1rem 2rem;
+  }
+</style>
