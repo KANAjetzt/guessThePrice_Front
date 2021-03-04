@@ -3,6 +3,7 @@
   import PlayerCreation from "./PlayerCreation.svelte";
   import InviteLinkBtn from "./BtnInviteLink.svelte";
   import PlayerBoard from "./PlayerBoard.svelte";
+  import GameSettings from "./GameSettings.svelte";
 
   const startGame = async () => {
     console.log("starting Game!");
@@ -18,6 +19,8 @@
   <div class="playerCreation">
     <PlayerCreation />
   </div>
+
+  <GameSettings />
 
   <button class="startBtn" on:click={startGame}> Play! </button>
 
