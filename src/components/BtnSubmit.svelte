@@ -1,12 +1,7 @@
 <script>
-  import { roomStore, appStore } from "../stores";
+  import { createEventDispatcher } from "svelte";
 
-  const handleClick = async (e) => {
-    // Send guessed price to BE
-    await $roomStore.send("guessedPrice", {
-      guessedPrice: $appStore.guessedPrice,
-    });
-  };
+  const dispatch = createEventDispatcher();
 </script>
 
-<button on:click={handleClick}>✔</button>
+<button on:click={() => dispatch("click")}>✔</button>

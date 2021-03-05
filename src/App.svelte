@@ -1,25 +1,34 @@
 <script>
-  import * as Colyseus from "colyseus.js";
-
   import { onMount } from "svelte";
-
+  import * as Colyseus from "colyseus.js";
   import { roomStore, roomState, appStore } from "./stores";
-  import PlayerBoard from "./components/PlayerBoard.svelte";
-  import BtnSubmit from "./components/BtnSubmit.svelte";
-  import Carousel from "./components/Carousel.svelte";
-  import CurrencyInput from "./components/CurrencyInput.svelte";
-  import Gallery from "./components/Gallery.svelte";
-  import BetweenRounds from "./components/BetweenRounds.svelte";
-  import GameEnd from "./components/GameEnd.svelte";
-
-  let clientWidth;
-  $: $appStore.clientWidth = clientWidth;
+  import Game from "./components/Game.svelte";
+  import Lobby from "./components/Lobby.svelte";
 
   const client = new Colyseus.Client(svelteEnv.BackendUrl);
 
+  // Switch view if game has started
+  $: if ($roomState) {
+    if ($roomState.gameStarted) {
+      $appStore.currentRoom = "game";
+    }
+  }
+
   const joinRoom = async () => {
-    const room = await client.joinOrCreate("my_room");
-    console.log(room.sessionId, "joined", room.name);
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomId = urlParams.get("c");
+
+    let room;
+
+    // Check if roomId is in URL --> /?c=1f0bbd3c1
+    if (roomId) {
+      console.log("joining Room");
+      room = await client.joinById(roomId);
+    } else {
+      console.log("creating Room");
+      room = await client.create("my_room");
+    }
+
     return room;
   };
 
@@ -33,6 +42,7 @@
   const handleRoom = async () => {
     // join Room
     const room = await joinRoom();
+    console.log(room.sessionId, "joined", room.name);
 
     // store room object
     $roomStore = room;
@@ -59,64 +69,11 @@
   });
 </script>
 
-<svelte:window bind:innerWidth={clientWidth} />
-
-<main>
-  {#if $roomState}
-    {#if !$roomState.gameEnded && !$roomState.isBetweenRounds}
-      <!-- Title -->
-      <h2>{$roomState.currentProduct.title}</h2>
-
-      <!-- Images -->
-      {#if $appStore.clientWidth > 535}
-        <Gallery>
-          {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as src, i}
-            <img {src} alt={`Productbild-${i}`} />
-          {/each}
-        </Gallery>
-      {:else}
-        <Carousel />
-      {/if}
-
-      <!-- Feature Bullets -->
-      {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
-        <p>{feature[1]}</p>
-      {/each}
-
-      <!-- Description -->
-      <p>{$roomState.currentProduct.description}</p>
-      <!-- Technical Details -->
-      {#if $roomState.currentProduct.technicalDetails}
-        {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
-          <p>{technicalDetail.join(": ")}</p>
-        {/each}
-      {/if}
-      <!-- Rating Count -->
-      <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
-      <!-- Rating Stars -->
-      <p>{$roomState.currentProduct.ratingStars} Sternen</p>
-      <!-- Creation Date -->
-      <p>
-        Stand: {new Date(
-          $roomState.currentProduct.creationDate
-        ).toLocaleDateString("de-DE")}
-      </p>
-      <CurrencyInput />
-      {#if $appStore.guessedPrice}
-        <BtnSubmit />
-      {/if}
-      <PlayerBoard />
-    {/if}
-
-    {#if $roomState.isBetweenRounds}
-      <BetweenRounds />
-    {/if}
-
-    {#if $roomState.gameEnded}
-      <GameEnd />
-    {/if}
+{#if client}
+  {#if $appStore.currentRoom === "game"}
+    <Game />
   {/if}
-</main>
-
-<style>
-</style>
+  {#if $appStore.currentRoom === "lobby"}
+    <Lobby />
+  {/if}
+{/if}
