@@ -7,7 +7,9 @@
   import { tweened } from "svelte/motion";
   import { cubicInOut } from "svelte/easing";
   import { fade, fly } from "svelte/transition";
+  import { roomStore, roomState, appStore } from "../stores";
   import Currency from "./Currency.svelte";
+  import GameSettings from "./GameSettings.svelte";
 
   export let name;
   export let avatar;
@@ -33,9 +35,11 @@
       <p>{name}</p>
     {/if}
 
-    <p>
-      <Currency cent={guessedPrice} />
-    </p>
+    {#if $roomState.gameSettings.showGuessedPrice || $roomState.isBetweenRounds}
+      <p>
+        <Currency cent={guessedPrice} />
+      </p>
+    {/if}
     <p>
       {Math.floor($tweenedScore)}
       {#if roundScore !== 0 && showRoundScore}
