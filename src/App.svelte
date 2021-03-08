@@ -9,9 +9,12 @@
 
   // Switch view if game has started
   $: if ($roomState) {
+    // Change currentRoom in appStore to game so the game comp is mounted
     if ($roomState.gameStarted) {
       $appStore.currentRoom = "game";
     }
+
+    // Set currentPlayer in appStore
     if (!$appStore.currentPlayer) {
       $appStore.currentPlayer = [...$roomState.playerStates.$items].filter(
         (player) => player[1].id === $roomStore.sessionId
