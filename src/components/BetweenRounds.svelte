@@ -16,6 +16,9 @@
 </script>
 
 <section class="betweenRounds">
+  <h2>
+    Runde {$roomState.currentRound + 1} von {$roomState.gameSettings.rounds}
+  </h2>
   <div class="info">
     <p class="price">
       Preis: <Currency cent={$roomState.currentProduct.price} />
@@ -43,6 +46,7 @@
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(20px) brightness(0.2);
