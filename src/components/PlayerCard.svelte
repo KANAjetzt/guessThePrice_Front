@@ -51,17 +51,13 @@
   $: tweenedScoreBG.set(getTweenedScoreBGValue());
 
   const handlePlayerCardStyle = () => {
-    let style = `playerCard`;
-
-    if ($roomState.isBetweenRounds) {
-      style.concat(` scoreBG`);
-    }
+    let styles = ["playerCard", "scoreBG"];
 
     if (winner) {
-      style.concat(` winner`);
+      styles = [...styles, "winner"];
     }
 
-    return `playerCard scoreBG`;
+    return styles.join(" ");
   };
 </script>
 
