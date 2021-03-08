@@ -71,7 +71,7 @@
       {#if $appStore.guessedPrice}
         <BtnSubmit on:click={handleGuessedPriceSubmit} />
       {/if}
-      <PlayerBoard store={roomState} />
+      <PlayerBoard />
     {/if}
 
     {#if $roomState.isBetweenRounds}
