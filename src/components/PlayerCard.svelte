@@ -23,23 +23,11 @@
   $: tweenedScore.set(score);
 
   const getTweenedScoreBGValue = () => {
-    // Check if singleplayer
-    // TODO: add a playerCount Value some where on the backend
-    if ([...$roomState.playerStates.$items].length === 1) {
-      // Calculate based on the max posible score ( 1000 * roundCount )
-      const maxScore = $roomState.gameSettings.rounds * 1000;
-
-      const value = 100 - (100 / maxScore) * score;
-
-      console.log(value);
-      return value;
-    }
     // Calculate based on the max posible score ( 1000 * roundCount )
     const maxScore = $roomState.gameSettings.rounds * 1000;
 
     const value = 100 - (100 / maxScore) * score;
 
-    console.log(value);
     return value;
   };
 
