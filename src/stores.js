@@ -11,4 +11,5 @@ export const appStore = writable({
   isAutoNumericOn: false,
   clientWidth: undefined,
   currentRoom: "lobby",
+  currentPlayer: undefined,
 });

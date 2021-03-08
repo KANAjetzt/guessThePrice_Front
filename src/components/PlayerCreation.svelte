@@ -2,11 +2,7 @@
   import { roomState, roomStore, appStore } from "../stores";
   import BtnSubmit from "./BtnSubmit.svelte";
 
-  let player = [...$roomState.playerStates.$items].filter(
-    (player) => player[1].id === $roomStore.sessionId
-  )[0][1];
-
-  let name = player.name;
+  let name = $appStore.currentPlayer.name;
 
   const handleNameChangeSubmit = async () => {
     // Send guessed price to BE
@@ -17,7 +13,7 @@
 </script>
 
 <div class="playerCreation">
-  <img src={player.avatar} alt="" />
+  <img src={$appStore.currentPlayer.avatar} alt="" />
   <div class="playerNameInput">
     <input type="text" bind:value={name} />
     <BtnSubmit on:click={handleNameChangeSubmit} />

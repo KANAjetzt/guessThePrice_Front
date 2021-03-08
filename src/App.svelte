@@ -12,6 +12,11 @@
     if ($roomState.gameStarted) {
       $appStore.currentRoom = "game";
     }
+    if (!$appStore.currentPlayer) {
+      $appStore.currentPlayer = [...$roomState.playerStates.$items].filter(
+        (player) => player[1].id === $roomStore.sessionId
+      )[0][1];
+    }
   }
 
   const joinRoom = async () => {

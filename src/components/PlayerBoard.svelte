@@ -39,6 +39,7 @@
         animate:flip
       >
         <PlayerCard
+          id={player[1].id}
           name={player[1].name}
           avatar={player[1].avatar}
           roundScore={player[1].roundScore}

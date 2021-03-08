@@ -11,6 +11,7 @@
   import Currency from "./Currency.svelte";
   import GameSettings from "./GameSettings.svelte";
 
+  export let id;
   export let name;
   export let avatar;
   export let roundScore = 0;
@@ -33,7 +34,9 @@
 
   <div class="info">
     {#if name}
-      <p>{name}</p>
+      <p class={$appStore.currentPlayer.id === id ? "name ownName" : "name"}>
+        {name}
+      </p>
     {/if}
 
     {#if $roomState.gameSettings.showGuessedPrice || $roomState.isBetweenRounds}
@@ -83,5 +86,9 @@
 
   .winner {
     border: solid 3px #ffd700;
+  }
+
+  .ownName {
+    font-weight: 700;
   }
 </style>
