@@ -16,6 +16,7 @@
   export let roundScore = 0;
   export let score = 0;
   export let guessedPrice = 0;
+  export let winner = false;
 
   let showRoundScore = true;
 
@@ -27,7 +28,7 @@
   $: tweenedScore.set(score);
 </script>
 
-<div class="playerCard">
+<div class={winner ? "playerCard winner" : "playerCard"}>
   <img class="avatar" src={avatar} alt="" />
 
   <div class="info">
@@ -78,5 +79,9 @@
   .roundScore {
     display: inline-block;
     color: green;
+  }
+
+  .winner {
+    border: solid 3px #ffd700;
   }
 </style>
