@@ -4,6 +4,7 @@
   import { roomStore, roomState, appStore } from "./stores";
   import Game from "./components/Game.svelte";
   import Lobby from "./components/Lobby.svelte";
+  import CharacterCreation from "./components/CharacterCreation.svelte";
 
   const client = new Colyseus.Client(svelteEnv.BackendUrl);
 
@@ -82,6 +83,7 @@
     <Game />
   {/if}
   {#if $appStore.currentRoom === "lobby"}
-    <Lobby />
+    <!-- <Lobby /> -->
+    <CharacterCreation />
   {/if}
 {/if}
