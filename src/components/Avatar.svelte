@@ -3,13 +3,18 @@
   import BtnReload from "./BtnReload.svelte";
 
   export let showBtnReload = false;
+
+  const handleReload = async () => {
+    // Send avatar cange message to BE
+    await $roomStore.send("avatarChange");
+  };
 </script>
 
 <div class="avatar">
   <img class="avatarImg" src={$appStore.currentPlayer.avatar} alt="" />
   {#if showBtnReload}
     <div class="btnReload">
-      <BtnReload />
+      <BtnReload on:click={handleReload} />
     </div>
   {/if}
 </div>

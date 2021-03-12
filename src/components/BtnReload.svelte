@@ -1,8 +1,16 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import ReplayIcon from "./Icons/Replay.svelte";
+
+  const dispatch = createEventDispatcher();
 </script>
 
-<button class="reloadBtn">
+<button
+  class="reloadBtn"
+  on:click={() => {
+    dispatch("click");
+  }}
+>
   <div class="icon">
     <ReplayIcon width={35} height={35} fill={"black"} />
   </div>

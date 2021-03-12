@@ -6,22 +6,12 @@
   import BtnDefault from "./BtnDefault.svelte";
   import Loader from "./Loader.svelte";
 
-  let name;
-
-  $: if ($roomState) {
-    if (!appStore.currentPlayer) {
-      name = $appStore.currentPlayer.name;
-    }
-  }
-
-  const handleNameChangeSubmit = async () => {
-    // Send guessed price to BE
-    await $roomStore.send("nameChange", {
-      name,
-    });
-  };
-
   const startGame = async () => {
+    // Send Name to BE
+    await $roomStore.send("nameChange", {
+      name: $appStore.currentPlayer.name,
+    });
+
     console.log("starting Game!");
     await $roomStore.send("startGame");
   };
@@ -31,10 +21,10 @@
   <div class="characterCreation">
     <div class="playerCreation">
       <Avatar showBtnReload={true} />
-      <TextInput bind:value={name} />
+      <TextInput bind:value={$appStore.currentPlayer.name} />
     </div>
 
-    <BtnDefault>
+    <BtnDefault on:click={startGame}>
       <div class="playArrowIcon">
         <PlayArrowIcon width={12} height={14} fill={"black"} />
       </div>
