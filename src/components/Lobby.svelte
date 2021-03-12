@@ -1,6 +1,6 @@
 <script>
   import { roomState, roomStore, appStore } from "../stores";
-  import PlayerCreation from "./PlayerCreation.svelte";
+
   import InviteLinkBtn from "./BtnInviteLink.svelte";
   import PlayerBoard from "./PlayerBoard.svelte";
   import GameSettings from "./GameSettings.svelte";
@@ -14,10 +14,6 @@
 {#if $roomState}
   <div class="inviteLink">
     <InviteLinkBtn />
-  </div>
-
-  <div class="playerCreation">
-    <PlayerCreation />
   </div>
 
   <GameSettings />

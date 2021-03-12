@@ -22,6 +22,7 @@
   /* InfoDropDownField */
   --color-1-darker: #11243c;
   --color-1-lighter: #27568c;
+  --color-1-alpha8: hsla(212, 56%, 35%, 0.8);
   --color-2: #23c7d9;
   --color-3: #f2e527;
 
@@ -55,7 +56,7 @@
 
   /* -- Shadows -- */
   /* BtnIcon */
-  --shadow-1: 0px 4px 2px rgba(96, 90, 6, 0.35);
+  --shadow-1: 0px 4px 1px rgba(96, 90, 6, 0.8);
   --shadow-1--color1: 0px 4px 2px rgba(11, 26, 40, 0.35);
   /* Btn */
   --shadow-2: 0px 4px 4px rgba(45, 42, 9, 0.36);
@@ -95,9 +96,14 @@ h5,
 h6,
 p,
 label,
-button,
 input {
   font-family: var(--baseFont);
+  color: var(--color-font-1);
+}
+
+button {
+  font-family: var(--baseFont);
+  color: var(--color-font-2);
 }
 
 h1 {

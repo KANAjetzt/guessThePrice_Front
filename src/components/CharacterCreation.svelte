@@ -1,9 +1,25 @@
 <script>
   import { roomState, roomStore, appStore } from "../stores";
-  import PlayerCreation from "./PlayerCreation.svelte";
-  import InviteLinkBtn from "./BtnInviteLink.svelte";
-  import PlayerBoard from "./PlayerBoard.svelte";
-  import GameSettings from "./GameSettings.svelte";
+  import PlayArrowIcon from "./Icons/PlayArrow.svelte";
+  import Avatar from "./Avatar.svelte";
+  import TextInput from "./TextInput.svelte";
+  import BtnDefault from "./BtnDefault.svelte";
+  import Loader from "./Loader.svelte";
+
+  let name;
+
+  $: if ($roomState) {
+    if (!appStore.currentPlayer) {
+      name = $appStore.currentPlayer.name;
+    }
+  }
+
+  const handleNameChangeSubmit = async () => {
+    // Send guessed price to BE
+    await $roomStore.send("nameChange", {
+      name,
+    });
+  };
 
   const startGame = async () => {
     console.log("starting Game!");
@@ -12,23 +28,40 @@
 </script>
 
 {#if $roomState}
-  <div class="playerCreation">
-    <PlayerCreation />
-  </div>
+  <div class="characterCreation">
+    <div class="playerCreation">
+      <Avatar showBtnReload={true} />
+      <TextInput bind:value={name} />
+    </div>
 
-  <button class="startBtn" on:click={startGame}> Play! </button>
+    <BtnDefault>
+      <div class="playArrowIcon">
+        <PlayArrowIcon width={12} height={14} fill={"black"} />
+      </div>
+      <span>START</span>
+    </BtnDefault>
+  </div>
 {:else}
-  <p>loading...</p>
+  <Loader style={"fullPageCentered"} />
 {/if}
 
 <style>
-  .playerCreation {
-    padding: 2rem;
+  .characterCreation {
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    gap: 30vh;
+    padding-top: 25vh;
   }
-  .startBtn {
-    font-weight: 700;
-    display: block;
-    margin: 2rem auto 2rem auto;
-    padding: 1rem 2rem;
+
+  .playerCreation {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .playArrowIcon {
+    position: absolute;
+    left: 0.6rem;
   }
 </style>
