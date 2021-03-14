@@ -96,7 +96,8 @@ h5,
 h6,
 p,
 label,
-input {
+input,
+caption {
   font-family: var(--baseFont);
   color: var(--color-font-1);
 }

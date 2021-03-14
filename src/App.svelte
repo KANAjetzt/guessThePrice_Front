@@ -68,6 +68,12 @@
       // send alivePing back
       pingPong();
     });
+
+    // listen to error
+    // TODO: Add Toster and Fullpage Error Messages
+    room.onMessage("error", (message) => {
+      console.log(message);
+    });
   };
 
   onMount(async () => {
@@ -77,11 +83,13 @@
 </script>
 
 {#if client}
-  {#if $appStore.currentRoom === "game"}
-    <Game />
+  {#if $appStore.currentRoom === "characterCreation"}
+    <CharacterCreation />
   {/if}
   {#if $appStore.currentRoom === "lobby"}
-    <!-- <Lobby /> -->
-    <CharacterCreation />
+    <Lobby />
+  {/if}
+  {#if $appStore.currentRoom === "game"}
+    <Game />
   {/if}
 {/if}

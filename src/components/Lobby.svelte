@@ -2,8 +2,10 @@
   import { roomState, roomStore, appStore } from "../stores";
 
   import InviteLinkBtn from "./BtnInviteLink.svelte";
+  import PlayerList from "./PlayerList.svelte";
   import PlayerBoard from "./PlayerBoard.svelte";
   import GameSettings from "./GameSettings.svelte";
+  import Loader from "./Loader.svelte";
 
   const startGame = async () => {
     console.log("starting Game!");
@@ -12,17 +14,11 @@
 </script>
 
 {#if $roomState}
-  <div class="inviteLink">
-    <InviteLinkBtn />
-  </div>
-
-  <GameSettings />
-
-  <button class="startBtn" on:click={startGame}> Play! </button>
-
-  <PlayerBoard />
+  <PlayerList />
+  <!-- <InviteLinkBtn />
+  <GameSettings /> -->
 {:else}
-  <p>loading...</p>
+  <Loader style={"fullPageCentered"} />
 {/if}
 
 <style>

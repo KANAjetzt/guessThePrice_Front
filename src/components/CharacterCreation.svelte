@@ -12,8 +12,11 @@
       name: $appStore.currentPlayer.name,
     });
 
-    console.log("starting Game!");
-    await $roomStore.send("startGame");
+    // Switch to Lobby
+    $appStore.currentRoom = "lobby";
+
+    // console.log("starting Game!");
+    // await $roomStore.send("startGame");
   };
 </script>
 
