@@ -23,7 +23,9 @@
 {#if $roomState}
   <div class="characterCreation">
     <div class="playerCreation">
-      <Avatar showBtnReload={true} />
+      <div class="avatar">
+        <Avatar showBtnReload={true} />
+      </div>
       <TextInput bind:value={$appStore.currentPlayer.name} />
     </div>
 
@@ -37,14 +39,19 @@
   .characterCreation {
     display: grid;
     grid-template-rows: 1fr min-content;
+    justify-items: center;
     gap: 30vh;
     padding-top: 25vh;
   }
-
   .playerCreation {
     display: grid;
     gap: 3rem;
     align-items: center;
     justify-items: center;
+  }
+
+  .avatar {
+    width: 17rem;
+    height: 17rem;
   }
 </style>

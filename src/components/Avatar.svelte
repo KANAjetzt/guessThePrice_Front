@@ -4,7 +4,7 @@
 
   export let showBtnReload = false;
   export let style = "";
-  export let img = $appStore.currentPlayer.avatar;
+  export let img = undefined;
 
   const handleReload = async () => {
     // Send avatar cange message to BE
@@ -13,7 +13,11 @@
 </script>
 
 <div class="avatar {style}">
-  <img class="avatarImg" src={img} alt="" />
+  <img
+    class="avatarImg"
+    src={img ? img : $appStore.currentPlayer.avatar}
+    alt=""
+  />
   {#if showBtnReload}
     <div class="btnReload">
       <BtnReload on:click={handleReload} />
@@ -45,6 +49,6 @@
   .btnReload {
     position: absolute;
     bottom: -1rem;
-    right: -2rem;
+    right: -1rem;
   }
 </style>
