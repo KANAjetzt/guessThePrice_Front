@@ -27,6 +27,7 @@
   --color-3: #f2e527;
 
   --color-font-1: #eaf7fb;
+  --color-font-1--alpha85: hsla(194, 68%, 95%, 0.85);
   --color-font-2: #302d03;
 
   /* Main BG */
