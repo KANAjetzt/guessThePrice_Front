@@ -1,10 +1,11 @@
 <script>
   import { roomState, roomStore, appStore } from "../stores";
 
-  import InviteLinkBtn from "./BtnInviteLink.svelte";
   import PlayerList from "./PlayerList.svelte";
-  import PlayerBoard from "./PlayerBoard.svelte";
   import GameSettings from "./GameSettings.svelte";
+  import BtnPannel from "./BtnPannel.svelte";
+  import BtnInviteLink from "./BtnInviteLink.svelte";
+  import BtnStart from "./BtnStart.svelte";
   import Loader from "./Loader.svelte";
 
   const startGame = async () => {
@@ -14,9 +15,23 @@
 </script>
 
 {#if $roomState}
-  <PlayerList />
-  <GameSettings />
-  <!-- <InviteLinkBtn /> -->
+  <div class="lobby">
+    <PlayerList />
+    <GameSettings />
+    <BtnPannel>
+      <BtnInviteLink />
+      <BtnStart on:click={startGame} />
+    </BtnPannel>
+  </div>
 {:else}
   <Loader style={"fullPageCentered"} />
 {/if}
+
+<style>
+  .lobby {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    align-items: center;
+  }
+</style>

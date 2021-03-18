@@ -1,6 +1,8 @@
 <script>
   import { fly } from "svelte/transition";
   import { roomState, roomStore, appStore } from "../stores";
+  import BtnDefault from "./BtnDefault.svelte";
+  import LinkIcon from "./Icons/Link.svelte";
 
   let lobbyUrl;
   let isCoppyed = false;
@@ -20,13 +22,16 @@
   };
 </script>
 
-<button on:click={handleInviteLink}>
+<BtnDefault on:click={handleInviteLink}>
+  <div class="linkIcon">
+    <LinkIcon />
+  </div>
   {#if !isCoppyed}
-    Einladen
+    <span>EINLADEN</span>
   {:else}
-    Link kopiert 👍
+    <span>Link kopiert 👍</span>
   {/if}
-</button>
+</BtnDefault>
 {#if isCoppyError}
   <div class="InviteLinkInput" in:fly={{ duration: 200, y: -50 }}>
     <label for="inviteLink">Einladungslink:</label>
@@ -41,6 +46,11 @@
 {/if}
 
 <style>
+  .linkIcon {
+    position: absolute;
+    left: 0.6rem;
+  }
+
   .InviteLinkInput {
     display: flex;
     flex-direction: column;

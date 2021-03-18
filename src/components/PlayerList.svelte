@@ -1,5 +1,4 @@
 <script>
-  import { derived } from "svelte/store";
   import { roomState, roomStore, appStore } from "../stores";
   import Avatar from "./Avatar.svelte";
 </script>
@@ -30,6 +29,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+    width: 10rem;
   }
   .avatar {
     width: 5.3rem;

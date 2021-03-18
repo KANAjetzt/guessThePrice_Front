@@ -13,10 +13,12 @@
     position: relative;
     font-weight: 700;
     display: flex;
-    margin: 2rem auto 2rem auto;
+    justify-content: center;
     background-color: var(--color-3);
     border: none;
     border-radius: 3px;
-    padding: 1.2rem 5rem;
+    padding: 1.2rem 0;
+    width: 15rem;
+    text-transform: uppercase;
   }
 </style>

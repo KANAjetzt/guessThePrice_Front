@@ -1,12 +1,12 @@
 <script>
   import { roomState, roomStore, appStore } from "../stores";
-  import PlayArrowIcon from "./Icons/PlayArrow.svelte";
+
   import Avatar from "./Avatar.svelte";
   import TextInput from "./TextInput.svelte";
-  import BtnDefault from "./BtnDefault.svelte";
+  import BtnStart from "./BtnStart.svelte";
   import Loader from "./Loader.svelte";
 
-  const startGame = async () => {
+  const handleStartBtn = async () => {
     // Send Name to BE
     await $roomStore.send("nameChange", {
       name: $appStore.currentPlayer.name,
@@ -27,12 +27,7 @@
       <TextInput bind:value={$appStore.currentPlayer.name} />
     </div>
 
-    <BtnDefault on:click={startGame}>
-      <div class="playArrowIcon">
-        <PlayArrowIcon width={12} height={14} fill={"black"} />
-      </div>
-      <span>START</span>
-    </BtnDefault>
+    <BtnStart on:click={handleStartBtn} />
   </div>
 {:else}
   <Loader style={"fullPageCentered"} />
@@ -51,10 +46,5 @@
     gap: 3rem;
     align-items: center;
     justify-items: center;
-  }
-
-  .playArrowIcon {
-    position: absolute;
-    left: 0.6rem;
   }
 </style>

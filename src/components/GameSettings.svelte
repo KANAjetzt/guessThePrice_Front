@@ -99,14 +99,16 @@
   .settings {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: max-content max-content;
     align-items: center;
     justify-items: center;
     gap: 3rem;
+    margin-top: -10rem;
+    padding: 0 2.3rem 0 2.3rem;
   }
 
   .setting {
     width: 100%;
-    padding: 0 2.3rem;
   }
 
   label {
@@ -114,7 +116,7 @@
     text-align: center;
     width: 100%;
     font-weight: bold;
-    margin-bottom: 0.9rem;
+    margin-bottom: 0.5rem;
   }
   .border {
     position: relative;
