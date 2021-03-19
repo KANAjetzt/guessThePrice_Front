@@ -4,6 +4,7 @@
   import { fade, fly } from "svelte/transition";
   import { roomStore, roomState, appStore } from "../stores";
   import Currency from "./Currency.svelte";
+  import Avatar from "./Avatar.svelte";
 
   export let id;
   export let name;
@@ -53,15 +54,14 @@
   class={handlePlayerCardStyle()}
   style="background-position-x: {$tweenedScoreBG}%;"
 >
-  <img class="avatar" src={avatar} alt="" />
+  <div class="playerInfo">
+    <div class="avatar">
+      <Avatar img={avatar} />
+    </div>
+    <caption class="name">{name}</caption>
+  </div>
 
-  <div class="info">
-    {#if name}
-      <p class={$appStore.currentPlayer.id === id ? "name ownName" : "name"}>
-        {name}
-      </p>
-    {/if}
-
+  <div class="stats">
     {#if $roomState.gameSettings.showGuessedPrice || $roomState.isBetweenRounds}
       <p>
         <Currency cent={guessedPrice} />
@@ -87,14 +87,36 @@
 
 <style>
   .playerCard {
-    display: grid;
-    grid-template-columns: min-content 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem;
+    background-image: var(--color-gradient-1--90deg);
+    padding: 1.2rem 1.4rem 1rem 1.4rem;
+    box-shadow: var(--shadow-3);
+  }
+  .playerInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .avatar {
+    width: 5.3rem;
+    height: 5.3rem;
+  }
+  .name {
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: var(--smallFontSize);
   }
 
-  .scoreBG {
+  p {
+    font-size: var(--heading-3);
+    font-weight: 500;
+    text-align: left;
+    line-height: 1.4;
+  }
+
+  /* .scoreBG {
     background-image: linear-gradient(
       90deg,
       #5c5c5c62 0%,
@@ -102,17 +124,9 @@
       transparent 50%
     );
     background-size: 200%;
-  }
+  } */
 
-  .avatar {
-    grid-column: 1 / 2;
-    max-width: 6rem;
-    padding: 2rem;
-  }
-  .info {
-    grid-column: 2 / 3;
-  }
-  .roundScore {
+  /* .roundScore {
     display: inline-block;
     color: green;
   }
@@ -123,5 +137,5 @@
 
   .ownName {
     font-weight: 700;
-  }
+  } */
 </style>

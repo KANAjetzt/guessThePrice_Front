@@ -10,6 +10,6 @@ export const appStore = writable({
   guessedPrice: 0,
   isAutoNumericOn: false,
   clientWidth: undefined,
-  currentRoom: "characterCreation",
+  currentRoom: "lobby",
   currentPlayer: undefined,
 });

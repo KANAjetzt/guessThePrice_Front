@@ -74,6 +74,9 @@
     room.onMessage("error", (message) => {
       console.log(message);
     });
+
+    console.log("starting Game!");
+    await room.send("startGame");
   };
 
   onMount(async () => {

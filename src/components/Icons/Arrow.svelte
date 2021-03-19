@@ -1,9 +1,9 @@
 <script>
   import Icon from "./Icon.svelte";
 
-  export let width;
-  export let height;
-  export let fill;
+  export let width = 12;
+  export let height = 8;
+  export let fill = "#f2e527";
   export let shadow = true;
 </script>
 

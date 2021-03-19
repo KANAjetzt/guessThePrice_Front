@@ -22,11 +22,13 @@
   /* InfoDropDownField */
   --color-1-darker: #11243c;
   --color-1-lighter: #27568c;
+  --color-1-alpha5: hsla(220, 56%, 29%, 0.5);
   --color-1-alpha8: hsla(212, 56%, 35%, 0.8);
   --color-2: #23c7d9;
   --color-3: #f2e527;
 
   --color-font-1: #eaf7fb;
+  --color-font-1--alpha8: hsla(194, 68%, 95%, 0.8);
   --color-font-1--alpha85: hsla(194, 68%, 95%, 0.85);
   --color-font-2: #302d03;
 
@@ -131,4 +133,5 @@ h5 {
 p,
 label {
   font-size: var(--baseFontSize);
+  max-width: 70ch;
 }

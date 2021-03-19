@@ -51,9 +51,3 @@
     {/each}
   {/if}
 </div>
-
-<style>
-  .playerBoard {
-    border: solid 3px black;
-  }
-</style>

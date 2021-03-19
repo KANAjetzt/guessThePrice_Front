@@ -22,6 +22,5 @@
     background-color: var(--color-1-alpha8);
     border: none;
     z-index: 2;
-    backdrop-filter: blur(10px);
   }
 </style>
