@@ -2,9 +2,11 @@
   import { onMount } from "svelte";
   import * as Colyseus from "colyseus.js";
   import { roomStore, roomState, appStore } from "./stores";
-  import Game from "./components/Game.svelte";
-  import Lobby from "./components/Lobby.svelte";
   import CharacterCreation from "./components/CharacterCreation.svelte";
+  import Lobby from "./components/Lobby.svelte";
+  import Game from "./components/Game.svelte";
+  import BetweenRounds from "./components/BetweenRounds.svelte";
+  import GameEnd from "./components/GameEnd.svelte";
 
   const client = new Colyseus.Client(svelteEnv.BackendUrl);
 
@@ -13,6 +15,14 @@
     // Change currentRoom in appStore to game so the game comp is mounted
     if ($roomState.gameStarted) {
       $appStore.currentRoom = "game";
+    }
+
+    if ($roomState.isBetweenRounds) {
+      $appStore.currentRoom = "betweenRounds";
+    }
+
+    if ($roomState.gameEnded) {
+      $appStore.currentRoom = "gameEnd";
     }
 
     // Set currentPlayer in appStore
@@ -75,8 +85,15 @@
       console.log(message);
     });
 
-    console.log("starting Game!");
-    await room.send("startGame");
+    // console.log("starting Game!");
+    // await room.send("startGame");
+
+    // // Send guessed price to BE
+    // setTimeout(async () => {
+    //   await room.send("guessedPrice", {
+    //     guessedPrice: 2000,
+    //   });
+    // }, 500);
   };
 
   onMount(async () => {
@@ -94,5 +111,13 @@
   {/if}
   {#if $appStore.currentRoom === "game"}
     <Game />
+  {/if}
+
+  {#if $appStore.currentRoom === "betweenRounds"}
+    <BetweenRounds />
+  {/if}
+
+  {#if $appStore.currentRoom === "gameEnd"}
+    <GameEnd />
   {/if}
 {/if}

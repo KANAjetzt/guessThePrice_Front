@@ -21,6 +21,7 @@
   --color-1: #203c73;
   /* InfoDropDownField */
   --color-1-darker: #11243c;
+  --color-1-darker--alpha25: hsla(213, 56%, 15%, 0.25);
   --color-1-lighter: #27568c;
   --color-1-alpha5: hsla(220, 56%, 29%, 0.5);
   --color-1-alpha8: hsla(212, 56%, 35%, 0.8);
@@ -34,7 +35,7 @@
 
   /* Main BG */
   --color-gradient-1: linear-gradient(197.36deg, #203c73 0%, #204c73 100.86%);
-  /* PlayerBoard */
+  /* PlayerBoard / RoundCounter */
   --color-gradient-1--90deg: linear-gradient(90deg, #203c73 0%, #204c73 100%);
   /* TitlePanel */
   --color-gradient-1--darker: linear-gradient(90deg, #203c73 0%, #27498c 100%);
@@ -100,7 +101,8 @@ h6,
 p,
 label,
 input,
-caption {
+caption,
+span {
   font-family: var(--baseFont);
   color: var(--color-font-1);
 }

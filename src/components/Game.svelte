@@ -6,8 +6,6 @@
   import Carousel from "./Carousel.svelte";
   import CurrencyInput from "./CurrencyInput.svelte";
   import Gallery from "./Gallery.svelte";
-  import BetweenRounds from "./BetweenRounds.svelte";
-  import GameEnd from "./GameEnd.svelte";
   import ProductTitle from "./ProductTitle.svelte";
   import Info from "./Info.svelte";
 
@@ -70,14 +68,6 @@
       <PlayerBoard />
 
       <CurrencyInput />
-    {/if}
-
-    {#if $roomState.isBetweenRounds}
-      <BetweenRounds />
-    {/if}
-
-    {#if $roomState.gameEnded}
-      <GameEnd />
     {/if}
   {/if}
 </main>

@@ -63,38 +63,44 @@
 
   <div class="stats">
     {#if $roomState.gameSettings.showGuessedPrice || $roomState.isBetweenRounds}
-      <p>
+      <p class="price">
         <Currency cent={guessedPrice} />
       </p>
     {/if}
-    <p>
+    {#if roundScore !== 0 && showRoundScore}
+      <span
+        class="roundScore"
+        in:fade={{ duration: 300 }}
+        out:fly={{ duration: 1500, delay: 2000, x: 30 }}
+        on:introend={() => {
+          showRoundScore = false;
+        }}
+      >
+        +{roundScore}</span
+      >
+    {/if}
+    <p class="score">
       {Math.floor($tweenedScore)}
-      {#if roundScore !== 0 && showRoundScore}
-        <span
-          class="roundScore"
-          in:fade={{ duration: 300 }}
-          out:fly={{ duration: 1500, delay: 2000, x: -30 }}
-          on:introend={() => {
-            showRoundScore = false;
-          }}
-        >
-          +{roundScore}</span
-        >
-      {/if}
     </p>
   </div>
 </div>
 
 <style>
   .playerCard {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
     align-items: center;
     background-image: var(--color-gradient-1--90deg);
     padding: 1.2rem 1.4rem 1rem 1.4rem;
     box-shadow: var(--shadow-3);
   }
+
+  /* .playerCard--betweenRounds {
+    display: grid;
+  } */
+
   .playerInfo {
+    grid-column: 1 / 2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,33 +115,39 @@
     font-size: var(--smallFontSize);
   }
 
+  .stats {
+    grid-column: 3 / 4;
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    column-gap: 1rem;
+  }
   p {
     font-size: var(--heading-3);
     font-weight: 500;
-    text-align: left;
     line-height: 1.4;
+    text-align: right;
+  }
+  .price {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
   }
 
-  /* .scoreBG {
-    background-image: linear-gradient(
-      90deg,
-      #5c5c5c62 0%,
-      #5c5c5c62 50%,
-      transparent 50%
-    );
-    background-size: 200%;
-  } */
-
-  /* .roundScore {
-    display: inline-block;
-    color: green;
+  .score {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
   }
 
-  .winner {
-    border: solid 3px #ffd700;
+  .roundScore {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    background-image: var(--color-gradient-2);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: var(--heading-4);
+    font-weight: 500;
+    filter: drop-shadow(var(--shadow-1--color1));
   }
-
-  .ownName {
-    font-weight: 700;
-  } */
 </style>
