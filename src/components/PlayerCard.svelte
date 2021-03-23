@@ -118,7 +118,7 @@
   .stats {
     grid-column: 3 / 4;
     display: grid;
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: min-content 7rem;
     grid-template-rows: 1fr 1fr;
     align-items: center;
     column-gap: 1rem;
