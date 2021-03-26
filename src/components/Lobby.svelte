@@ -9,7 +9,6 @@
   import Loader from "./Loader.svelte";
 
   const startGame = async () => {
-    console.log("starting Game!");
     await $roomStore.send("startGame");
   };
 </script>

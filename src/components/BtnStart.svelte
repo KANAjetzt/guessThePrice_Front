@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { roomStore, roomState, appStore } from "../stores";
   import BtnDefault from "./BtnDefault.svelte";
   import PlayArrowIcon from "./Icons/PlayArrow.svelte";
 
@@ -14,7 +15,7 @@
   <div class="playArrowIcon">
     <PlayArrowIcon width={12} height={14} fill={"black"} />
   </div>
-  <span>START</span>
+  <span>{$appStore.currentRoom !== "gameEnd" ? "START" : "NEUSTART"}</span>
 </BtnDefault>
 
 <style>

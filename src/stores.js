@@ -1,8 +1,6 @@
-import { writable } from "svelte/store";
+import { derived, writable } from "svelte/store";
 
 export const roomState = writable();
-
-export const lobbyState = writable();
 
 export const roomStore = writable();
 
@@ -12,4 +10,11 @@ export const appStore = writable({
   clientWidth: undefined,
   currentRoom: "characterCreation",
   currentPlayer: undefined,
+});
+
+// Cannot read property 'score' of undefined --> da war ich gestern
+export const sortedPlayers = derived(roomState, ($roomState) => {
+  return [...$roomState.playerStates.$items]
+    .map((player) => player[1])
+    .sort((a, b) => b.score - a.score);
 });

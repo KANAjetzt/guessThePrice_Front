@@ -1,19 +1,23 @@
 <script>
   import { onMount } from "svelte";
-  import * as Colyseus from "colyseus.js";
   import { roomStore, roomState, appStore } from "./stores";
+  import RoomHandler from "./components/RoomHandler.svelte";
   import CharacterCreation from "./components/CharacterCreation.svelte";
   import Lobby from "./components/Lobby.svelte";
   import Game from "./components/Game.svelte";
   import BetweenRounds from "./components/BetweenRounds.svelte";
   import GameEnd from "./components/GameEnd.svelte";
 
-  const client = new Colyseus.Client(svelteEnv.BackendUrl);
+  let roomHandler;
 
   // Switch view if game has started
   $: if ($roomState) {
     // Change currentRoom in appStore to game so the game comp is mounted
-    if ($roomState.gameStarted) {
+    if ($roomState.isGameRestarted) {
+      $appStore.currentRoom = "lobby";
+    }
+
+    if ($roomState.isProductsLoaded) {
       $appStore.currentRoom = "game";
     }
 
@@ -26,83 +30,33 @@
     }
 
     // Set currentPlayer in appStore
-    $appStore.currentPlayer = [...$roomState.playerStates.$items].filter(
-      (player) => player[1].id === $roomStore.sessionId
-    )[0][1];
-  }
+    /* 
+      If the user is clicking on "back to Homepage",
+      handleBackToHomepage() on GameEnd leaves the current room
+      and connects to a new one.
+      Problem is the currentPlayer update is triggerd bevore 
+      the roomState is here so the filter retuns nothing.
+    */
 
-  const joinRoom = async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const roomId = urlParams.get("c");
+    if ($roomState.playerStates) {
+      const currentPlayer = [...$roomState.playerStates.$items].filter(
+        (player) => player[1].id === $roomStore.sessionId
+      );
 
-    let room;
-
-    // Check if roomId is in URL --> /?c=1f0bbd3c1
-    if (roomId) {
-      console.log("joining Room");
-      room = await client.joinById(roomId);
-    } else {
-      console.log("creating Room");
-      room = await client.create("my_room");
+      if (currentPlayer[0]) {
+        $appStore.currentPlayer = currentPlayer[0][1];
+      }
     }
-
-    return room;
-  };
-
-  // Keep's the ws connection alive on heroku (pings every 30s)
-  // https://devcenter.heroku.com/articles/websockets#timeouts
-  const pingPong = async () => {
-    // Send ping to server
-    await $roomStore.send("alivePing");
-  };
-
-  const handleRoom = async () => {
-    // join Room
-    const room = await joinRoom();
-    console.log(room.sessionId, "joined", room.name);
-
-    // store room object
-    $roomStore = room;
-
-    // start ping pong
-    pingPong();
-
-    // listen to state change
-    room.onStateChange((state) => {
-      $roomState = state;
-      console.log($roomState);
-    });
-
-    // listen to alivePong
-    room.onMessage("alivePong", () => {
-      // send alivePing back
-      pingPong();
-    });
-
-    // listen to error
-    // TODO: Add Toster and Fullpage Error Messages
-    room.onMessage("error", (message) => {
-      console.log(message);
-    });
-
-    // console.log("starting Game!");
-    // await room.send("startGame");
-
-    // // Send guessed price to BE
-    // setTimeout(async () => {
-    //   await room.send("guessedPrice", {
-    //     guessedPrice: 2000,
-    //   });
-    // }, 500);
-  };
+  }
 
   onMount(async () => {
     // Connect to game room and listen for state change
-    await handleRoom();
+    await roomHandler.handleRoom();
   });
 </script>
 
-{#if client}
+<RoomHandler bind:this={roomHandler} />
+{#if roomHandler}
   {#if $appStore.currentRoom === "characterCreation"}
     <CharacterCreation />
   {/if}

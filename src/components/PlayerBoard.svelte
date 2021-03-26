@@ -31,7 +31,7 @@
 
 <div class="playerBoard">
   {#if $roomState}
-    {#each sortedPlayers as player (player[1].id)}
+    {#each sortedPlayers as player, i (i)}
       <div
         class="playerCard"
         in:receive|local={{ key: player[1].id }}
