@@ -1,15 +1,17 @@
 <script>
   import Carousel from "@beyonk/svelte-carousel";
-  import { ChevronLeftIcon, ChevronRightIcon } from "svelte-feather-icons";
+  import ArrowIcon from "./Icons/Arrow.svelte";
 
   import { roomState } from "../stores";
 </script>
 
-<div>
+<div class="carousel">
   {#if [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs][0]}
     <Carousel perPage={1}>
       <span class="control" slot="left-control">
-        <ChevronLeftIcon />
+        <div class="leftArrow">
+          <ArrowIcon width={15} height={20} shadow={false} />
+        </div>
       </span>
       {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as img}
         {#if img}
@@ -19,20 +21,35 @@
         {/if}
       {/each}
       <span class="control" slot="right-control">
-        <ChevronRightIcon />
+        <div class="rightArrow">
+          <ArrowIcon width={15} height={20} shadow={false} />
+        </div>
       </span>
     </Carousel>
   {/if}
 </div>
 
 <style>
-  img {
-    max-width: 100vw;
+  .carousel {
+    background-color: var(--color-1-darker);
   }
-
   .slide-content {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem 5rem 4rem 5rem;
+  }
+
+  img {
+    height: 30vh;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .rightArrow {
+    transform: rotate(-90deg);
+  }
+  .leftArrow {
+    transform: rotate(90deg);
   }
 </style>

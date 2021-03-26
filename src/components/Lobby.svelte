@@ -1,47 +1,36 @@
 <script>
   import { roomState, roomStore, appStore } from "../stores";
-  import PlayerCreation from "./PlayerCreation.svelte";
-  import InviteLinkBtn from "./BtnInviteLink.svelte";
-  import PlayerBoard from "./PlayerBoard.svelte";
+
+  import PlayerList from "./PlayerList.svelte";
   import GameSettings from "./GameSettings.svelte";
+  import BtnPannel from "./BtnPannel.svelte";
+  import BtnInviteLink from "./BtnInviteLink.svelte";
+  import BtnStart from "./BtnStart.svelte";
+  import Loader from "./Loader.svelte";
 
   const startGame = async () => {
-    console.log("starting Game!");
     await $roomStore.send("startGame");
   };
 </script>
 
 {#if $roomState}
-  <div class="inviteLink">
-    <InviteLinkBtn />
+  <div class="lobby">
+    <PlayerList />
+    <GameSettings />
+    <BtnPannel>
+      <BtnInviteLink />
+      <BtnStart on:click={startGame} />
+    </BtnPannel>
   </div>
-
-  <div class="playerCreation">
-    <PlayerCreation />
-  </div>
-
-  <GameSettings />
-
-  <button class="startBtn" on:click={startGame}> Play! </button>
-
-  <PlayerBoard />
 {:else}
-  <p>loading...</p>
+  <Loader style={"fullPageCentered"} />
 {/if}
 
 <style>
-  .inviteLink {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-  }
-  .playerCreation {
-    padding: 2rem;
-  }
-  .startBtn {
-    font-weight: 700;
-    display: block;
-    margin: 2rem auto 2rem auto;
-    padding: 1rem 2rem;
+  .lobby {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    align-items: center;
   }
 </style>

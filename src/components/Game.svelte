@@ -6,15 +6,8 @@
   import Carousel from "./Carousel.svelte";
   import CurrencyInput from "./CurrencyInput.svelte";
   import Gallery from "./Gallery.svelte";
-  import BetweenRounds from "./BetweenRounds.svelte";
-  import GameEnd from "./GameEnd.svelte";
-
-  const handleGuessedPriceSubmit = async (e) => {
-    // Send guessed price to BE
-    await $roomStore.send("guessedPrice", {
-      guessedPrice: $appStore.guessedPrice,
-    });
-  };
+  import ProductTitle from "./ProductTitle.svelte";
+  import Info from "./Info.svelte";
 
   let clientWidth;
   $: $appStore.clientWidth = clientWidth;
@@ -31,7 +24,7 @@
   {#if $roomState}
     {#if !$roomState.gameEnded && !$roomState.isBetweenRounds}
       <!-- Title -->
-      <h2>{$roomState.currentProduct.title}</h2>
+      <ProductTitle />
 
       <!-- Images -->
       {#if $appStore.clientWidth > 535}
@@ -44,45 +37,45 @@
         <Carousel />
       {/if}
 
-      <!-- Feature Bullets -->
-      {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
-        <p>{feature[1]}</p>
-      {/each}
-
       <!-- Description -->
-      <p>{$roomState.currentProduct.description}</p>
+      <Info title={"Beschreibung"}>
+        <p>{$roomState.currentProduct.description}</p>
+      </Info>
+
       <!-- Technical Details -->
       {#if $roomState.currentProduct.technicalDetails}
-        {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
-          <p>{technicalDetail.join(": ")}</p>
+        <Info title={"Technische Daten"}>
+          {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
+            <p>{technicalDetail.join(": ")}</p>
+          {/each}
+        </Info>
+      {/if}
+
+      <!-- Feature Bullets -->
+      <Info title={"Features"}>
+        {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
+          <p>{feature[1]}</p>
         {/each}
-      {/if}
+      </Info>
+
       <!-- Rating Count -->
-      <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
-      <!-- Rating Stars -->
-      <p>{$roomState.currentProduct.ratingStars} Sternen</p>
-      <!-- Creation Date -->
-      <p>
-        Stand: {new Date(
-          $roomState.currentProduct.creationDate
-        ).toLocaleDateString("de-DE")}
-      </p>
+      <Info title={"Bewertung"}>
+        <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
+        <!-- Rating Stars -->
+        <p>{$roomState.currentProduct.ratingStars} Sternen</p>
+      </Info>
+
+      <PlayerBoard />
+
       <CurrencyInput />
-      {#if $appStore.guessedPrice}
-        <BtnSubmit on:click={handleGuessedPriceSubmit} />
-      {/if}
-      <PlayerBoard store={roomState} />
-    {/if}
-
-    {#if $roomState.isBetweenRounds}
-      <BetweenRounds />
-    {/if}
-
-    {#if $roomState.gameEnded}
-      <GameEnd />
     {/if}
   {/if}
 </main>
 
 <style>
+  /* CurrencyInput is blocking the last playerCard without that */
+  main {
+    min-height: 100vh;
+    margin-bottom: 12.2rem;
+  }
 </style>

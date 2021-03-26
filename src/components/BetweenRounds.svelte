@@ -1,50 +1,46 @@
 <script>
-  import { onMount } from "svelte";
   import { roomStore, roomState, appStore } from "../stores";
   import PlayerBoard from "./PlayerBoard.svelte";
-  import Timer from "./Timer.svelte";
   import Currency from "./Currency.svelte";
-
-  onMount(() => {
-    // Overflow hidden on body
-    document.querySelector("body").style.overflow = "hidden";
-    return () => {
-      // Overflow hidden on body
-      document.querySelector("body").style.overflow = "unset";
-    };
-  });
+  import RoundCounter from "./RoundCounter.svelte";
+  import ProductTitle from "./ProductTitle.svelte";
+  import Carousel from "./Carousel.svelte";
 </script>
 
-<section class="betweenRounds">
-  <div class="info">
-    <p class="price">
-      Preis: <Currency cent={$roomState.currentProduct.price} />
-    </p>
-    <PlayerBoard />
+<main class="betweenRounds">
+  <RoundCounter />
+  <ProductTitle />
+  <div class="carousel">
+    <Carousel />
   </div>
-  <Timer />
-</section>
+
+  <p class="price">
+    Tatsächlicher Preis <br />
+    <span>
+      <Currency cent={$roomState.currentProduct.price} />
+    </span>
+  </p>
+
+  <PlayerBoard />
+</main>
 
 <style>
-  .info {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
-  }
-
-  .price {
-    justify-self: center;
-  }
-
   .betweenRounds {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(20px) brightness(0.2);
+    display: grid;
+  }
+
+  .carousel {
+    max-width: 100vw;
+  }
+  .price {
+    padding: 2.8rem 0;
+    font-size: var(--heading-4);
+    font-weight: bold;
+    text-align: center;
+  }
+
+  span {
+    font-size: var(--heading-3);
+    font-weight: 500;
   }
 </style>
