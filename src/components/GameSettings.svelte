@@ -146,4 +146,10 @@
     z-index: 2;
     appearance: none;
   }
+
+  @media only screen and (min-width: 80em) {
+    .settings {
+      margin-top: unset;
+    }
+  }
 </style>
