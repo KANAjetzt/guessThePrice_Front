@@ -11,7 +11,7 @@
     padding: 1rem;
     position: relative;
     background-image: var(--color-gradient-2);
-    padding: 2px;
+    padding: 0.2rem;
     border-radius: 3px;
   }
 

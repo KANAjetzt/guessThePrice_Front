@@ -123,7 +123,7 @@
     width: 100%;
     padding: 1rem;
     background-image: var(--color-gradient-2);
-    padding: 2px;
+    padding: 0.2rem;
     border-radius: 3px;
   }
 
