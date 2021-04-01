@@ -43,6 +43,7 @@
     // listen to state change
     room.onStateChange((state) => {
       $roomState = state;
+      // console.log($roomState);
     });
 
     // listen to alivePong
