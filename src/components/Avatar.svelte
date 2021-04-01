@@ -47,7 +47,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 0 3px var(--color-2);
+    box-shadow: 0 0 0 0.3rem var(--color-2);
     border-radius: 100%;
     background-color: var(--color-1-alpha5);
   }
