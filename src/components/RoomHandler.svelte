@@ -56,5 +56,15 @@
     room.onMessage("error", (message) => {
       console.log(message);
     });
+
+    // console.log("starting Game!");
+    // await room.send("startGame");
+
+    // // Send guessed price to BE
+    // setTimeout(async () => {
+    //   await room.send("guessedPrice", {
+    //     guessedPrice: 2000,
+    //   });
+    // }, 500);
   };
 </script>
