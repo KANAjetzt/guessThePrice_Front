@@ -125,6 +125,7 @@
     background-image: var(--color-gradient-2);
     padding: 0.2rem;
     border-radius: 3px;
+    cursor: pointer;
   }
 
   .arrowIcon {
@@ -133,6 +134,7 @@
     top: 50%;
     z-index: 3;
     transform: translateY(-50%);
+    pointer-events: none;
   }
 
   select {
@@ -145,6 +147,7 @@
     border: none;
     z-index: 2;
     appearance: none;
+    cursor: pointer;
   }
 
   @media only screen and (min-width: 80em) {
