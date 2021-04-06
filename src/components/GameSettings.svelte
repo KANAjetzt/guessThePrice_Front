@@ -69,8 +69,8 @@
         bind:value={showGuessedPrice}
         on:input={handleShowGuessedPriceInput}
       >
-        <option value="true">ja</option>
-        <option value="false">nein</option>
+        <option value="false">ja</option>
+        <option value="true">nein</option>
       </select>
     </div>
   </div>

@@ -48,7 +48,7 @@
 
     <div class={`stats stats--${style}`}>
       {#if $appStore.currentRoom !== "gameEnd"}
-        {#if $roomState.gameSettings.showGuessedPrice || $roomState.isBetweenRounds}
+        {#if $roomState.gameSettings.showGuessedPrice || $roomState.isBetweenRounds || id === $appStore.currentPlayer.id}
           <p class="price">
             <Currency cent={guessedPrice} />
           </p>
