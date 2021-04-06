@@ -22,5 +22,11 @@
     background-color: var(--color-1-alpha8);
     border: none;
     z-index: 2;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .input:hover,
+  .input:focus {
+    filter: contrast(1.5);
   }
 </style>

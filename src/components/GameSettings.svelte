@@ -148,6 +148,12 @@
     z-index: 2;
     appearance: none;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  select:hover,
+  select:focus {
+    filter: contrast(1.5);
   }
 
   @media only screen and (min-width: 80em) {
