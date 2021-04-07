@@ -8,8 +8,9 @@
   import { tweened } from "svelte/motion";
   import { derived } from "svelte/store";
   import { bounceOut } from "svelte/easing";
+  import { roomStore, roomState, appStore } from "../stores";
 
-  let timerValue = 5;
+  let timerValue = $roomState.gameSettings.betweenRoundsTime;
 
   const timer = tweened(timerValue, { easing: bounceOut });
 
