@@ -1,6 +1,7 @@
 <script>
   import { roomState, roomStore, appStore } from "../stores";
   import ArrowIcon from "./Icons/Arrow.svelte";
+  import LockIcon from "./Icons/Lock.svelte";
 
   let rounds = 5;
   let showGuessedPrice = true;
@@ -42,13 +43,18 @@
     <label for="rounds">Runden</label>
     <div class="border">
       <div class="arrowIcon">
-        <ArrowIcon width={12} height={8} shadow={false} fill={"#f2e527"} />
+        {#if $appStore.currentPlayer.admin}
+          <ArrowIcon width={12} height={8} shadow={false} fill={"#f2e527"} />
+        {:else}
+          <LockIcon width={18} height={12} shadow={false} fill={"#f2e527"} />
+        {/if}
       </div>
       <select
         name="rounds"
         id="rounds"
         bind:value={rounds}
         on:input={handleRoundsInput}
+        disabled={!$appStore.currentPlayer.admin}
       >
         <option value="5">5</option>
         <option value="10">10</option>
@@ -61,13 +67,18 @@
     <label for="showGuessedPrice">Geheim</label>
     <div class="border">
       <div class="arrowIcon">
-        <ArrowIcon width={12} height={8} shadow={false} fill={"#f2e527"} />
+        {#if $appStore.currentPlayer.admin}
+          <ArrowIcon width={12} height={8} shadow={false} fill={"#f2e527"} />
+        {:else}
+          <LockIcon width={18} height={12} shadow={false} fill={"#f2e527"} />
+        {/if}
       </div>
       <select
         name="showGuessedPrice"
         id="showGuessedPrice"
         bind:value={showGuessedPrice}
         on:input={handleShowGuessedPriceInput}
+        disabled={!$appStore.currentPlayer.admin}
       >
         <option value="false">ja</option>
         <option value="true">nein</option>
@@ -78,13 +89,18 @@
     <label for="maxPlayers">Spieleranzahl</label>
     <div class="border">
       <div class="arrowIcon">
-        <ArrowIcon width={12} height={8} shadow={false} fill={"#f2e527"} />
+        {#if $appStore.currentPlayer.admin}
+          <ArrowIcon width={12} height={8} shadow={false} fill={"#f2e527"} />
+        {:else}
+          <LockIcon width={18} height={12} shadow={false} fill={"#f2e527"} />
+        {/if}
       </div>
       <select
         name="maxPlayers"
         id="maxPlayers"
         bind:value={maxPlayers}
         on:input={handleMaxPlayersInput}
+        disabled={!$appStore.currentPlayer.admin}
       >
         <option value="5">5</option>
         <option value="10">10</option>

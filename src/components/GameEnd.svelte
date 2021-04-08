@@ -73,7 +73,10 @@
         </div>
         <span>STARTSEITE</span>
       </BtnDefault>
-      <BtnStart on:click={handleRestart} />
+      <BtnStart
+        on:click={handleRestart}
+        disabled={!$appStore.currentPlayer.admin}
+      />
     </BtnPannel>
   </main>
 {/if}

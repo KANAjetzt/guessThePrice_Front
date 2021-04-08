@@ -24,7 +24,10 @@
     <section class="btnPannel">
       <BtnPannel>
         <BtnInviteLink />
-        <BtnStart on:click={startGame} />
+        <BtnStart
+          on:click={startGame}
+          disabled={!$appStore.currentPlayer.admin}
+        />
       </BtnPannel>
     </section>
   </main>

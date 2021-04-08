@@ -2,9 +2,11 @@
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
+
+  export let disabled = false;
 </script>
 
-<button class="btn" on:click={() => dispatch("click")}>
+<button class="btn" on:click={() => dispatch("click")} {disabled}>
   <slot />
 </button>
 
