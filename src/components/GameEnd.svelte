@@ -11,6 +11,7 @@
   let roomHandler;
   let winner = undefined;
   let difference = 0;
+  let single = [...$roomState.playerStates.$items].length === 1;
 
   roomState.subscribe((data) => {
     winner = data.playerStates.filter((player) => player.winner)[0];
@@ -42,7 +43,7 @@
 <RoomHandler bind:this={roomHandler} />
 {#if winner}
   <main class="gameEnd">
-    <div class="winner">
+    <section class={`winner ${single ? "winner--single" : ""}`}>
       <div class="avatar">
         <Avatar
           img={winner.avatar}
@@ -60,21 +61,23 @@
           </p>
         {/if}
       </div>
-    </div>
-    <div class="playerBoard">
+    </section>
+    <section class="playerBoard">
       <PlayerBoard />
-    </div>
-    <div class="btnPannel">
-      <BtnPannel>
-        <BtnDefault on:click={handleBackToHomepage}>
-          <div class="previousIcon">
-            <PreviousIcon />
-          </div>
-          <span>STARTSEITE</span>
-        </BtnDefault>
-        <BtnStart on:click={handleRestart} />
-      </BtnPannel>
-    </div>
+    </section>
+    <section class="btnPannel" />
+    <BtnPannel style={single ? "winnerSingle" : "gameEnd"}>
+      <BtnDefault on:click={handleBackToHomepage}>
+        <div class="previousIcon">
+          <PreviousIcon />
+        </div>
+        <span>STARTSEITE</span>
+      </BtnDefault>
+      <BtnStart
+        on:click={handleRestart}
+        disabled={!$appStore.currentPlayer.admin}
+      />
+    </BtnPannel>
   </main>
 {/if}
 
@@ -82,6 +85,7 @@
   .gameEnd {
     display: grid;
     grid-template-rows: 1fr max-content max-content;
+    grid-template-columns: 25vw 1fr;
     align-items: center;
     justify-items: center;
     min-height: 100vh;
@@ -90,6 +94,11 @@
   .winner {
     display: flex;
     flex-direction: column;
+    grid-column: 1 / 3;
+  }
+
+  .winner--single {
+    grid-column: 1 / 3;
   }
   .avatar {
     width: 17rem;
@@ -127,13 +136,36 @@
   }
   .playerBoard {
     width: 100%;
+    grid-row: 2 / 3;
+    grid-column: 1 / 3;
   }
   .btnPannel {
     width: 100%;
     margin-top: 0.4rem;
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    height: 100%;
+    background-image: var(--color-gradient-1--90deg);
   }
   .previousIcon {
     position: absolute;
     left: 0.6rem;
+  }
+
+  @media only screen and (min-width: 80em) {
+    .winner {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+    }
+
+    .winner--single {
+      grid-column: 1 / 3;
+    }
+
+    .playerBoard {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      align-self: end;
+    }
   }
 </style>

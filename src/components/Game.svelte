@@ -24,49 +24,56 @@
   {#if $roomState}
     {#if !$roomState.gameEnded && !$roomState.isBetweenRounds}
       <!-- Title -->
-      <ProductTitle />
+      <section class="title">
+        <ProductTitle />
+      </section>
 
       <!-- Images -->
       {#if $appStore.clientWidth > 535}
-        <Gallery>
-          {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as src, i}
-            <img {src} alt={`Productbild-${i}`} />
-          {/each}
-        </Gallery>
+        <section class="gallery">
+          <Gallery>
+            {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as src, i}
+              <img {src} alt={`Productbild-${i}`} />
+            {/each}
+          </Gallery>
+        </section>
       {:else}
-        <Carousel />
+        <section class="carousel">
+          <Carousel />
+        </section>
       {/if}
+      <section class="infos">
+        <!-- Description -->
+        <Info title={"Beschreibung"}>
+          <p>{$roomState.currentProduct.description}</p>
+        </Info>
 
-      <!-- Description -->
-      <Info title={"Beschreibung"}>
-        <p>{$roomState.currentProduct.description}</p>
-      </Info>
+        <!-- Technical Details -->
+        {#if $roomState.currentProduct.technicalDetails}
+          <Info title={"Technische Daten"}>
+            {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
+              <p>{technicalDetail.join(": ")}</p>
+            {/each}
+          </Info>
+        {/if}
 
-      <!-- Technical Details -->
-      {#if $roomState.currentProduct.technicalDetails}
-        <Info title={"Technische Daten"}>
-          {#each [...$roomState.currentProduct.technicalDetails.$items] as technicalDetail}
-            <p>{technicalDetail.join(": ")}</p>
+        <!-- Feature Bullets -->
+        <Info title={"Features"}>
+          {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
+            <p>{feature[1]}</p>
           {/each}
         </Info>
-      {/if}
 
-      <!-- Feature Bullets -->
-      <Info title={"Features"}>
-        {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
-          <p>{feature[1]}</p>
-        {/each}
-      </Info>
-
-      <!-- Rating Count -->
-      <Info title={"Bewertung"}>
-        <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
-        <!-- Rating Stars -->
-        <p>{$roomState.currentProduct.ratingStars} Sternen</p>
-      </Info>
-
-      <PlayerBoard />
-
+        <!-- Rating Count -->
+        <Info title={"Bewertung"}>
+          <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
+          <!-- Rating Stars -->
+          <p>{$roomState.currentProduct.ratingStars} Sternen</p>
+        </Info>
+      </section>
+      <section class="playerBoard">
+        <PlayerBoard />
+      </section>
       <CurrencyInput />
     {/if}
   {/if}
@@ -77,5 +84,38 @@
   main {
     min-height: 100vh;
     margin-bottom: 12.2rem;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+  }
+
+  section {
+    grid-column: 1 / 3;
+  }
+
+  @media only screen and (min-width: 80em) {
+    section {
+      grid-column: 2 / 3;
+    }
+  }
+
+  .carousel {
+    max-width: 100vw;
+  }
+
+  @media only screen and (min-width: 80em) {
+    .playerBoard {
+      grid-column: 1 / 2;
+      grid-row: 1 / 5;
+      position: sticky;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  @media only screen and (min-width: 120em) {
+    .infos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(50rem, 1fr));
+    }
   }
 </style>

@@ -76,6 +76,12 @@
     background-color: var(--color-1-alpha8);
     border: none;
     z-index: 2;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .guessedPriceInput:hover,
+  .guessedPriceInput:focus {
+    filter: contrast(1.5);
   }
 
   .guessedPriceInput::placeholder {
@@ -86,7 +92,7 @@
     padding: 1rem;
     position: relative;
     background-image: var(--color-gradient-2);
-    padding: 2px;
+    padding: 0.2rem;
     border-radius: 3px;
   }
 

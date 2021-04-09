@@ -51,7 +51,7 @@ export default {
         isProd: production,
         BackendUrl: production
           ? "wss://guessthepricegame.herokuapp.com/"
-          : "ws://192.168.178.34:2567",
+          : "ws://192.168.178.52:2567",
       }),
     }),
     svelte({

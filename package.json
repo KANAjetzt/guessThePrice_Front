@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public --host 192.168.178.34"
+    "start": "sirv public --host 192.168.178.52"
   },
   "devDependencies": {
     "@beyonk/svelte-carousel": "^2.8.0",

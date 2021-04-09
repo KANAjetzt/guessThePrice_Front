@@ -87,6 +87,18 @@ html {
   box-sizing: border-box;
 }
 
+@media only screen and (min-width: 62.5em) {
+  html {
+    font-size: 100%;
+  }
+}
+
+@media only screen and (min-width: 120em) {
+  html {
+    font-size: 120%;
+  }
+}
+
 body {
   background-image: var(--color-gradient-1);
   min-height: 100vh;

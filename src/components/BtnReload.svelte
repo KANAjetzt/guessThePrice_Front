@@ -24,6 +24,14 @@
     border-radius: 100%;
     border: none;
     background-color: var(--color-3);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  .reloadBtn:hover,
+  .reloadBtn:focus {
+    transform: translateY(-0.2rem);
+    filter: drop-shadow(var(--shadow-1--color1));
   }
 
   .icon {

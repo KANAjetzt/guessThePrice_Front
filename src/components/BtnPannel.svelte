@@ -1,4 +1,8 @@
-<div class="btnPannel">
+<script>
+  export let style = "";
+</script>
+
+<div class={`btnPannel btnPannel--${style}`}>
   <slot />
 </div>
 
@@ -11,5 +15,29 @@
     gap: 1rem;
     background-image: var(--color-gradient-1--90deg);
     box-shadow: var(--shadow-3--negative);
+  }
+
+  .btnPannel--gameEnd {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    background-image: unset;
+  }
+
+  .btnPannel--winnerSingle {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    background-image: unset;
+  }
+
+  @media only screen and (min-width: 80em) {
+    .btnPannel--gameEnd {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+
+    .btnPannel--winnerSingle {
+      grid-column: 1 / 3;
+      grid-row: 3 / 4;
+    }
   }
 </style>

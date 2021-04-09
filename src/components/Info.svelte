@@ -26,15 +26,30 @@
 </section>
 
 <style>
+  .info {
+    cursor: pointer;
+  }
+
   .infoTitle {
     display: flex;
     justify-content: space-between;
     padding: 2.3rem 1.4rem;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .infoTitle:hover,
+  .infoTitle:focus {
+    filter: brightness(2);
   }
 
   h3 {
     font-size: var(--heading-5);
     font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  h3:hover,
+  h3:focus {
+    filter: drop-shadow(var(--shadow--color1));
   }
 
   .content {

@@ -43,4 +43,12 @@
     font-weight: 500;
     font-size: var(--smallFontSize);
   }
+
+  @media only screen and (min-width: 80em) {
+    .playerList {
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+    }
+  }
 </style>
