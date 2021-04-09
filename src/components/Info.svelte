@@ -19,7 +19,7 @@
   </div>
 
   {#if clicked}
-    <div class="content" transition:slide={{ duration: 300, easing: quintOut }}>
+    <div class="content" transition:slide|local={{ duration: 300, easing: quintOut }}>
       <slot />
     </div>
   {/if}
