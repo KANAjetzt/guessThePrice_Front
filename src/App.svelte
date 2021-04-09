@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { roomStore, roomState, appStore } from "./stores";
+  import Head from "./components/Head.svelte";
   import RoomHandler from "./components/RoomHandler.svelte";
   import CharacterCreation from "./components/CharacterCreation.svelte";
   import Lobby from "./components/Lobby.svelte";
@@ -54,6 +55,8 @@
     await roomHandler.handleRoom();
   });
 </script>
+
+<Head />
 
 <RoomHandler bind:this={roomHandler} />
 {#if roomHandler}
