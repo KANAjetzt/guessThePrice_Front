@@ -56,8 +56,6 @@
   });
 </script>
 
-<Head />
-
 <RoomHandler bind:this={roomHandler} />
 {#if roomHandler}
   {#if $appStore.currentRoom === "characterCreation"}

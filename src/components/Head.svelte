@@ -1,4 +1,8 @@
 <script>
+// JS is not executed by crawlers
+// Maybe there is a way to make this work with netlify pre rendering or netlify functions
+// For now I just slap all of it right in the index.html
+
   const title = "Preis Schätz Spiel";
   const description =
     "Das Online-Preisschätzspiel! Spiele das beliebte Spiel jetzt kostenlos!";
@@ -7,6 +11,9 @@
 </script>
 
 <svelte:head>
+
+
+
   <title>{title}</title>
 
   <!-- Primary Meta Tags -->
