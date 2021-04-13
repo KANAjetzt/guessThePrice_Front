@@ -38,12 +38,6 @@
       sessionData = getLS("sessionData");
     }
 
-    if (Object.keys(sessionData).length === 0) {
-      // get possible roomId from URLParams
-      const urlParams = new URLSearchParams(window.location.search);
-      sessionData.roomId = urlParams.get("c");
-    }
-
     // join Room
     let room;
     try {
@@ -51,6 +45,11 @@
     } catch (e) {
       deleteLS("sessionData");
       sessionData = {};
+
+      // get possible roomId from URLParams
+      const urlParams = new URLSearchParams(window.location.search);
+      sessionData.roomId = urlParams.get("c");
+
       room = await joinRoom(sessionData);
     }
 
