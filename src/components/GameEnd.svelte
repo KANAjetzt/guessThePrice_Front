@@ -1,4 +1,5 @@
 <script>
+  import { deleteLS } from "../utils/localStorageHandler";
   import { roomStore, roomState, appStore, sortedPlayers } from "../stores";
   import Avatar from "./Avatar.svelte";
   import BtnDefault from "./BtnDefault.svelte";
@@ -24,12 +25,11 @@
   }
 
   const handleBackToHomepage = async () => {
-    // leav current room
-    $roomStore.leave();
-    // Connect again
-    await roomHandler.handleRoom();
-    // Go to CharacterCreation
-    $appStore.currentRoom = "characterCreation";
+    // Delete all LS data
+    deleteLS('sessionData')
+
+    // Refresh the page
+    location.reload()
   };
 
   const handleRestart = async () => {
