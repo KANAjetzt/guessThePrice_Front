@@ -71,7 +71,7 @@
 
     // listen to state change
     room.onStateChange((state) => {
-      $roomState = state;
+      $roomState = state.gameState;
       // console.log($roomState);
     });
 
