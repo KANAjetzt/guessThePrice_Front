@@ -44,9 +44,11 @@
       {/if}
       <section class="infos">
         <!-- Description -->
+       {#if $roomState.currentProduct.description}
         <Info title={"Beschreibung"}>
           <p>{$roomState.currentProduct.description}</p>
         </Info>
+        {/if}
 
         <!-- Technical Details -->
         {#if $roomState.currentProduct.technicalDetails}
@@ -58,17 +60,21 @@
         {/if}
 
         <!-- Feature Bullets -->
+        {#if $roomState.currentProduct.featureBullets}
         <Info title={"Features"}>
           {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
             <p>{feature[1]}</p>
           {/each}
         </Info>
+        {/if}
 
         <!-- Rating Count -->
         <Info title={"Bewertung"}>
           <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
           <!-- Rating Stars -->
+          {#if $roomState.currentProduct.ratingStars}
           <p>{$roomState.currentProduct.ratingStars} Sternen</p>
+          {/if}
         </Info>
       </section>
       <section class="playerBoard">
