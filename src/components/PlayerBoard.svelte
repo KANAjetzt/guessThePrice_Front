@@ -51,3 +51,10 @@
     {/each}
   {/if}
 </div>
+
+<style>
+  .playerBoard {
+    position: sticky;
+    top: 0;
+  }
+</style>

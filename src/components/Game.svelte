@@ -112,9 +112,6 @@
     .playerBoard {
       grid-column: 1 / 2;
       grid-row: 1 / 5;
-      position: sticky;
-      top: 0;
-      left: 0;
     }
   }
 
