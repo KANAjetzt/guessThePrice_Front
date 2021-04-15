@@ -10,6 +10,8 @@ export const appStore = writable({
   clientWidth: undefined,
   currentRoom: "characterCreation",
   currentPlayer: undefined,
+  modalIsOpen: false,
+  galleryClickedImage: undefined,
 });
 
 // Cannot read property 'score' of undefined --> da war ich gestern
