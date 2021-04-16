@@ -8,6 +8,7 @@
   import Game from "./components/Game.svelte";
   import BetweenRounds from "./components/BetweenRounds.svelte";
   import GameEnd from "./components/GameEnd.svelte";
+  import PageTransition from "./components/PageTransition.svelte";
 
   let roomHandler;
 
@@ -59,20 +60,30 @@
 <RoomHandler bind:this={roomHandler} />
 {#if roomHandler}
   {#if $appStore.currentRoom === "characterCreation"}
-    <CharacterCreation />
+    <PageTransition>
+      <CharacterCreation />
+    </PageTransition>
   {/if}
   {#if $appStore.currentRoom === "lobby"}
-    <Lobby />
+    <PageTransition>
+      <Lobby />
+    </PageTransition>
   {/if}
   {#if $appStore.currentRoom === "game"}
-    <Game />
+    <PageTransition>
+      <Game />
+    </PageTransition>
   {/if}
 
   {#if $appStore.currentRoom === "betweenRounds"}
-    <BetweenRounds />
+    <PageTransition>
+      <BetweenRounds />
+    </PageTransition>
   {/if}
 
   {#if $appStore.currentRoom === "gameEnd"}
-    <GameEnd />
+    <PageTransition>
+      <GameEnd />
+    </PageTransition>
   {/if}
 {/if}

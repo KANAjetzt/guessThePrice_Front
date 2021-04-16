@@ -8,6 +8,7 @@
   import Gallery from "./Gallery.svelte";
   import ProductTitle from "./ProductTitle.svelte";
   import Info from "./Info.svelte";
+  import GalleryV2 from "./GalleryV2.svelte";
 
   let clientWidth;
   $: $appStore.clientWidth = clientWidth;
@@ -31,11 +32,12 @@
       <!-- Images -->
       {#if $appStore.clientWidth > 535}
         <section class="gallery">
-          <Gallery>
+          <!-- <Gallery>
             {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as src, i}
               <img {src} alt={`Productbild-${i}`} />
             {/each}
-          </Gallery>
+          </Gallery> -->
+          <GalleryV2 />
         </section>
       {:else}
         <section class="carousel">
@@ -44,9 +46,11 @@
       {/if}
       <section class="infos">
         <!-- Description -->
-        <Info title={"Beschreibung"}>
-          <p>{$roomState.currentProduct.description}</p>
-        </Info>
+        {#if $roomState.currentProduct.description}
+          <Info title={"Beschreibung"}>
+            <p>{$roomState.currentProduct.description}</p>
+          </Info>
+        {/if}
 
         <!-- Technical Details -->
         {#if $roomState.currentProduct.technicalDetails}
@@ -58,17 +62,21 @@
         {/if}
 
         <!-- Feature Bullets -->
-        <Info title={"Features"}>
-          {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
-            <p>{feature[1]}</p>
-          {/each}
-        </Info>
+        {#if $roomState.currentProduct.featureBullets}
+          <Info title={"Features"}>
+            {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
+              <p>{feature[1]}</p>
+            {/each}
+          </Info>
+        {/if}
 
         <!-- Rating Count -->
         <Info title={"Bewertung"}>
           <p>Anzahl Rezensionen: {$roomState.currentProduct.ratingCount}</p>
           <!-- Rating Stars -->
-          <p>{$roomState.currentProduct.ratingStars} Sternen</p>
+          {#if $roomState.currentProduct.ratingStars}
+            <p>{$roomState.currentProduct.ratingStars} Sternen</p>
+          {/if}
         </Info>
       </section>
       <section class="playerBoard">
@@ -106,9 +114,6 @@
     .playerBoard {
       grid-column: 1 / 2;
       grid-row: 1 / 5;
-      position: sticky;
-      top: 0;
-      left: 0;
     }
   }
 
