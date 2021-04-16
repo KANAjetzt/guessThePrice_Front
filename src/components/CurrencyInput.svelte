@@ -6,6 +6,18 @@
   import BtnDefault from "./BtnDefault.svelte";
   import CheckIcon from "./Icons/Check.svelte";
 
+  let countDown = 5;
+  let isCountDownStarted = false;
+
+  $: if ($roomState?.allPlayerGuessed) {
+    if (!isCountDownStarted) {
+      setInterval(() => {
+        countDown--;
+      }, 1000);
+      isCountDownStarted = true;
+    }
+  }
+
   onMount(() => {
     new AutoNumeric(".guessedPriceInput", {
       currencySymbol: "€",
@@ -48,7 +60,11 @@
     <div class="checkIcon">
       <CheckIcon />
     </div>
-    <span>FERTIG!</span>
+    {#if !$roomState.allPlayerGuessed}
+      <span>FERTIG!</span>
+    {:else}
+      {countDown}
+    {/if}
   </BtnDefault>
 </div>
 
