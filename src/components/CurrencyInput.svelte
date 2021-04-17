@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import AutoNumeric from "autonumeric";
   import { roomStore, roomState, appStore } from "../stores";
-  import BtnSubmit from "./BtnSubmit.svelte";
   import BtnDefault from "./BtnDefault.svelte";
   import CheckIcon from "./Icons/Check.svelte";
 
@@ -52,6 +51,12 @@
           $appStore.guessedPrice = parseInt(numbers.join(""));
         } else {
           $appStore.guessedPrice = 0;
+        }
+      }}
+      on:keydown={(e) => {
+        if (e.key === "Enter") {
+          e.target.blur();
+          handleGuessedPriceSubmit();
         }
       }}
     />

@@ -12,6 +12,9 @@
     padding: 1.2rem 1.4rem;
     box-shadow: var(--shadow-4);
     margin-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   h2 {

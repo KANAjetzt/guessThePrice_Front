@@ -111,10 +111,9 @@
   .stats {
     grid-column: 3 / 4;
     display: grid;
-    grid-template-columns: min-content 20rem;
+    grid-template-columns: 5rem 20rem;
     grid-template-rows: 1fr 1fr;
     align-items: center;
-    column-gap: 1rem;
   }
 
   .stats--gameEnd {
@@ -135,6 +134,7 @@
   .score {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+    justify-self: end;
   }
   .score--gameEnd {
     grid-column: 2 / 3;
