@@ -47,6 +47,10 @@
     justify-items: center;
   }
 
+  .productTilte {
+    width: 100%;
+  }
+
   .price {
     width: 100%;
     padding: 2.8rem 0;
@@ -58,7 +62,9 @@
   .productImg {
     width: 100%;
     height: auto;
+    max-height: 50vh;
     padding: 5rem;
+    object-fit: contain;
   }
 
   .playerBoard {
