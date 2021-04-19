@@ -13,9 +13,9 @@
 
 <div class="border">
   <div class="inputWrapper">
-    <div class="icon" on:click={handleRandomNameReload}>
+    <button class="icon" on:click={handleRandomNameReload}>
       <IconReplay width={20} height={20} fill={"#f2e527"} />
-    </div>
+    </button>
     <input class="input" type="text" bind:value />
   </div>
 </div>
@@ -53,6 +53,9 @@
     top: 54%;
     right: -2%;
     transform: translate(-50%, -50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
     z-index: 5;
   }
 </style>
