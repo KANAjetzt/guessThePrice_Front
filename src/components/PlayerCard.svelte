@@ -43,7 +43,11 @@
           }}
         />
       </div>
-      <caption class={`name name--${style}`}>{name}</caption>
+      <caption
+        class={`name name--${style} ${
+          id === $appStore.currentPlayer.id ? "name--currentPlayer" : ""
+        }`}>{name}</caption
+      >
     </div>
 
     <div class={`stats stats--${style}`}>
@@ -96,6 +100,10 @@
     margin-top: 1rem;
     font-weight: 500;
     font-size: var(--smallFontSize);
+  }
+
+  .name--currentPlayer {
+    font-weight: bold;
   }
 
   .name--gameEnd {
