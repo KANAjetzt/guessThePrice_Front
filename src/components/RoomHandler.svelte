@@ -38,6 +38,16 @@
       sessionData = getLS("sessionData");
     }
 
+    // TODO: get rid of this duplicate code?!
+    // get possible roomId from URLParams
+    const urlParams = new URLSearchParams(window.location.search);
+    const URLRoomId = urlParams.get("c");
+
+    if (URLRoomId) {
+      // if there is something add / overwrite roomId in sessionData
+      sessionData.roomId = URLRoomId;
+    }
+
     // join Room
     let room;
     try {
