@@ -107,6 +107,7 @@
   @media only screen and (min-width: 180em) {
     main {
       margin-bottom: unset;
+      row-gap: 5rem;
     }
   }
 
@@ -131,12 +132,12 @@
   }
   @media only screen and (min-width: 180em) {
     .currencyInput {
-      align-self: center;
+      align-self: end;
       position: relative;
       bottom: unset;
       width: 100%;
       grid-column: 3 / 4;
-      grid-row: 1 / 5;
+      grid-row: 1 / 3;
       padding: 0 1.4rem;
     }
 
@@ -148,6 +149,7 @@
       grid-row: 1 / 5;
       background-color: var(--color-1-alpha5);
       box-shadow: var(--shadow-4--negative);
+      min-height: 100vh;
     }
   }
 
