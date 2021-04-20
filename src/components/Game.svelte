@@ -82,7 +82,9 @@
       <section class="playerBoard">
         <PlayerBoard />
       </section>
-      <CurrencyInput />
+      <section class="currencyInput">
+        <CurrencyInput />
+      </section>
     {/if}
   {/if}
 </main>
@@ -94,6 +96,18 @@
     margin-bottom: 12.2rem;
     display: grid;
     grid-template-columns: max-content 1fr;
+  }
+
+  @media only screen and (min-width: 80em) {
+    main {
+      grid-template-columns: max-content 1fr max-content;
+    }
+  }
+
+  @media only screen and (min-width: 180em) {
+    main {
+      margin-bottom: unset;
+    }
   }
 
   section {
@@ -108,6 +122,33 @@
 
   .carousel {
     max-width: 100vw;
+  }
+
+  .currencyInput {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+  }
+  @media only screen and (min-width: 180em) {
+    .currencyInput {
+      align-self: center;
+      position: relative;
+      bottom: unset;
+      width: 100%;
+      grid-column: 3 / 4;
+      grid-row: 1 / 5;
+      padding: 0 1.4rem;
+    }
+
+    /* Background for CurrencyInput */
+    main::after {
+      display: block;
+      content: "";
+      grid-column: 3 / 4;
+      grid-row: 1 / 5;
+      background-color: var(--color-1-alpha5);
+      box-shadow: var(--shadow-4--negative);
+    }
   }
 
   @media only screen and (min-width: 80em) {
