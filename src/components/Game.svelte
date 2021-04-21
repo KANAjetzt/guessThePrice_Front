@@ -62,7 +62,7 @@
         {/if}
 
         <!-- Feature Bullets -->
-        {#if $roomState.currentProduct.featureBullets}
+        {#if $roomState.currentProduct.featureBullets[0]}
           <Info title={"Features"}>
             {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
               <p>{feature[1]}</p>
