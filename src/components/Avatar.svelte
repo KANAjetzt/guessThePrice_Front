@@ -97,8 +97,8 @@
 
   .checkIcon {
     position: absolute;
-    bottom: -3px;
-    right: -23px;
+    bottom: -0.3rem;
+    right: -2.3rem;
   }
 
   @media only screen and (min-width: 62.5em) {
