@@ -41,6 +41,7 @@
             }`,
             border: "playerCard",
           }}
+          showCheckIcon={guessedPrice !== 0 && $appStore.currentRoom === "game"}
         />
       </div>
       <caption
