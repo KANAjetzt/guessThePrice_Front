@@ -19,7 +19,7 @@
 
 <style>
   .playerList {
-    width: 100vw;
+    width: 100%;
     background-image: var(--color-gradient-1--90deg);
     box-shadow: var(--shadow-3);
     display: flex;
