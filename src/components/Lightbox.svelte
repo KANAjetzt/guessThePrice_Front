@@ -1,8 +1,13 @@
 <script>
+  import { onMount } from "svelte";
   import { fade, scale } from "svelte/transition";
   import { roomStore, roomState, appStore } from "../stores";
   import Modal from "./Modal.svelte";
   import BtnArrow from "./BtnArrow.svelte";
+
+  onMount(() => () => {
+    $appStore.modalIsOpen = false;
+  });
 
   const mediumImgCount = [
     ...$roomState.currentProduct.imgs.$items.get(0).mediumImgs,
