@@ -14,7 +14,7 @@
 <style>
   .roundCounter {
     position: relative;
-    width: 100vw;
+    width: 100%;
     padding: 2.3rem 0;
     background-image: var(--color-gradient-1--90deg);
   }
