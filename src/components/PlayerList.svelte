@@ -7,10 +7,7 @@
   {#each [...$roomState.playerStates.$items].map((player) => player[1]) as player}
     <div class="player">
       <div class="avatar">
-        <Avatar
-          style={{ avatar: "smallBorder", border: "" }}
-          img={player.avatar}
-        />
+        <Avatar style={{ avatar: "", border: "" }} img={player.avatar} />
       </div>
       <caption class="name">{player.name}</caption>
     </div>
