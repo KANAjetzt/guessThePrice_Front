@@ -96,6 +96,8 @@
     margin-bottom: 12.2rem;
     display: grid;
     grid-template-columns: max-content 1fr;
+    grid-auto-rows: max-content;
+    row-gap: 5rem;
   }
 
   @media only screen and (min-width: 80em) {
