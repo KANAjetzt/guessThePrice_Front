@@ -1,7 +1,10 @@
 <script>
+  import { fly } from "svelte/transition";
   import { roomState, roomStore, appStore } from "../stores";
   import BtnReload from "./BtnReload.svelte";
+  import Check2 from "./Icons/Check2.svelte";
 
+  export let showCheckIcon = false;
   export let showBtnReload = false;
   export let style = {
     // smallBorder / gameEnd
@@ -37,6 +40,11 @@
     {#if showBtnReload}
       <div class="btnReload">
         <BtnReload on:click={handleReload} />
+      </div>
+    {/if}
+    {#if showCheckIcon}
+      <div class="checkIcon" in:fly|local={{ duration: 200, x: -50 }}>
+        <Check2 shadow={false} fill={"#23c7d9"} />
       </div>
     {/if}
   </div>
@@ -85,6 +93,24 @@
     transform: translate(-50%, -50%);
     width: auto;
     height: 100%;
+  }
+
+  .checkIcon {
+    position: absolute;
+    bottom: -0.3rem;
+    right: -2.3rem;
+  }
+
+  @media only screen and (min-width: 62.5em) {
+    .checkIcon {
+      transform: scale(1.5);
+    }
+  }
+
+  @media only screen and (min-width: 120em) {
+    .checkIcon {
+      transform: scale(2);
+    }
   }
 
   .btnReload {

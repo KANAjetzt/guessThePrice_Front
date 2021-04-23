@@ -13,26 +13,27 @@
   <section class="roundCounter">
     <RoundCounter />
   </section>
-  <section class="productTilte">
-    <ProductTitle />
+  <section class="content">
+    <section class="productTilte">
+      <ProductTitle />
+    </section>
+    <section class="img">
+      <img
+        class="productImg"
+        src={[...$roomState.currentProduct.imgs][0].mediumImgs[0]}
+        alt=""
+      />
+    </section>
+    <section class="realPrice">
+      <p class="price">
+        Tatsächlicher Preis <br />
+        <span>
+          <Currency cent={$roomState.currentProduct.price} />
+        </span>
+      </p>
+    </section>
   </section>
 
-  <section class="img">
-    <img
-      class="productImg"
-      src={[...$roomState.currentProduct.imgs][0].mediumImgs[0]}
-      alt=""
-    />
-  </section>
-
-  <section class="realPrice">
-    <p class="price">
-      Tatsächlicher Preis <br />
-      <span>
-        <Currency cent={$roomState.currentProduct.price} />
-      </span>
-    </p>
-  </section>
   <section class="playerBoard">
     <PlayerBoard />
   </section>
@@ -45,6 +46,14 @@
     grid-template-rows: 1fr;
     max-width: 100vw;
     justify-items: center;
+  }
+
+  .roundCounter {
+    width: 100%;
+  }
+
+  .content {
+    width: 100%;
   }
 
   .productTilte {
@@ -65,6 +74,12 @@
     max-height: 50vh;
     padding: 5rem;
     object-fit: contain;
+  }
+
+  .realPrice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .playerBoard {

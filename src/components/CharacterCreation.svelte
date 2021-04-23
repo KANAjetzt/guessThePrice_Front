@@ -37,9 +37,17 @@
     display: grid;
     grid-template-rows: 1fr min-content;
     justify-items: center;
-    gap: 30vh;
-    padding-top: 25vh;
+    gap: 20vh;
+    padding-top: 15vh;
   }
+
+  @media only screen and (min-width: 62.5em) {
+    .characterCreation {
+      gap: 25vh;
+      padding-top: 25vh;
+    }
+  }
+
   .playerCreation {
     display: grid;
     gap: 3rem;

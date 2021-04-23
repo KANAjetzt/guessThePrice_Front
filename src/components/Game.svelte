@@ -62,7 +62,7 @@
         {/if}
 
         <!-- Feature Bullets -->
-        {#if $roomState.currentProduct.featureBullets}
+        {#if $roomState.currentProduct.featureBullets[0]}
           <Info title={"Features"}>
             {#each [...$roomState.currentProduct.featureBullets.$items] as feature}
               <p>{feature[1]}</p>
@@ -82,7 +82,9 @@
       <section class="playerBoard">
         <PlayerBoard />
       </section>
-      <CurrencyInput />
+      <section class="currencyInput">
+        <CurrencyInput />
+      </section>
     {/if}
   {/if}
 </main>
@@ -94,6 +96,21 @@
     margin-bottom: 12.2rem;
     display: grid;
     grid-template-columns: max-content 1fr;
+    grid-auto-rows: max-content;
+    row-gap: 5rem;
+  }
+
+  @media only screen and (min-width: 80em) {
+    main {
+      grid-template-columns: max-content 1fr max-content;
+    }
+  }
+
+  @media only screen and (min-width: 180em) {
+    main {
+      margin-bottom: unset;
+      row-gap: 5rem;
+    }
   }
 
   section {
@@ -108,6 +125,34 @@
 
   .carousel {
     max-width: 100vw;
+  }
+
+  .currencyInput {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+  }
+  @media only screen and (min-width: 180em) {
+    .currencyInput {
+      align-self: end;
+      position: relative;
+      bottom: unset;
+      width: 100%;
+      grid-column: 3 / 4;
+      grid-row: 1 / 3;
+      padding: 0 1.4rem;
+    }
+
+    /* Background for CurrencyInput */
+    main::after {
+      display: block;
+      content: "";
+      grid-column: 3 / 4;
+      grid-row: 1 / 5;
+      background-color: var(--color-1-alpha5);
+      box-shadow: var(--shadow-4--negative);
+      min-height: 100vh;
+    }
   }
 
   @media only screen and (min-width: 80em) {

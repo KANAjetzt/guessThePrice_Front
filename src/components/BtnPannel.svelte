@@ -21,12 +21,14 @@
     grid-column: 1 / 3;
     grid-row: 3 / 4;
     background-image: unset;
+    box-shadow: unset;
   }
 
   .btnPannel--winnerSingle {
     grid-column: 1 / 3;
     grid-row: 3 / 4;
     background-image: unset;
+    box-shadow: unset;
   }
 
   @media only screen and (min-width: 80em) {

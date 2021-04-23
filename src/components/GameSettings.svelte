@@ -7,6 +7,14 @@
   let showGuessedPrice = true;
   let maxPlayers = 5;
 
+  roomState.subscribe((newData) => {
+    if (newData.gameSettings) {
+      rounds = `${newData.gameSettings.rounds}`;
+      showGuessedPrice = `${newData.gameSettings.showGuessedPrice}`;
+      maxPlayers = `${newData.gameSettings.maxPlayers}`;
+    }
+  });
+
   const handleRoundsInput = async () => {
     // setTimeout because bind:value can't update rounds before we send it
     setTimeout(async () => {

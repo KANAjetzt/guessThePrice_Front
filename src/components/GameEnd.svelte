@@ -26,10 +26,10 @@
 
   const handleBackToHomepage = async () => {
     // Delete all LS data
-    deleteLS('sessionData')
+    deleteLS("sessionData");
 
     // Refresh the page
-    location.reload()
+    location.reload();
   };
 
   const handleRestart = async () => {
@@ -146,6 +146,7 @@
     grid-row: 3 / 4;
     height: 100%;
     background-image: var(--color-gradient-1--90deg);
+    box-shadow: var(--shadow-3--negative);
   }
   .previousIcon {
     position: absolute;

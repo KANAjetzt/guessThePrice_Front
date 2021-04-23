@@ -75,9 +75,6 @@
 
 <style>
   .currencyInput {
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
     padding: 1.9rem 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -86,6 +83,14 @@
     background-color: var(--color-1-alpha5);
     backdrop-filter: blur(4px);
     box-shadow: var(--shadow-4--negative);
+  }
+
+  @media only screen and (min-width: 180em) {
+    .currencyInput {
+      background-color: unset;
+      backdrop-filter: unset;
+      box-shadow: unset;
+    }
   }
 
   .guessedPriceInput {

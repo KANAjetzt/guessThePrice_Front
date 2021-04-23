@@ -18,6 +18,7 @@
   button {
     border: none;
     background: transparent;
+    cursor: pointer;
   }
 
   .left {

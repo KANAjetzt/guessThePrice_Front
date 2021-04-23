@@ -9,7 +9,7 @@
   let isCoppyError = false;
 
   $: if ($roomState) {
-    lobbyUrl = `${window.location.href}?c=${$roomStore.id}`;
+    lobbyUrl = `${window.location.origin}/?c=${$roomStore.id}`;
   }
 
   const handleInviteLink = async () => {
