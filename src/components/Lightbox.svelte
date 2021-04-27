@@ -5,10 +5,9 @@
   import { roomStore, roomState, appStore } from "../stores";
   import Modal from "./Modal.svelte";
   import BtnArrow from "./BtnArrow.svelte";
-  import { transition_in } from "svelte/internal";
 
   onMount(() => () => {
-    $appStore.modalIsOpen = false;
+    $appStore.lightboxIsOpen = false;
   });
 
   const mediumImgCount = [
@@ -20,8 +19,8 @@
   let isLeftBtnClick;
 </script>
 
-{#if $appStore.modalIsOpen}
-  <Modal>
+{#if $appStore.lightboxIsOpen}
+  <Modal name={"lightboxIsOpen"}>
     <div class="lightBox">
       <BtnArrow
         direction="left"

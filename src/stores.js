@@ -10,7 +10,8 @@ export const appStore = writable({
   clientWidth: undefined,
   currentRoom: "characterCreation",
   currentPlayer: undefined,
-  modalIsOpen: false,
+  lightboxIsOpen: false,
+  DSGVOisOpen: false,
   galleryClickedImage: undefined,
 });
 

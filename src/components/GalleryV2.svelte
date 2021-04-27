@@ -12,7 +12,7 @@
       {src}
       alt={`Productbild-${i}`}
       on:click={() => {
-        $appStore.modalIsOpen = true;
+        $appStore.lightboxIsOpen = true;
         $appStore.galleryClickedImage = i;
       }}
     />

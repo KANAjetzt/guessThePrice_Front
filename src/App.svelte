@@ -9,6 +9,8 @@
   import BetweenRounds from "./components/BetweenRounds.svelte";
   import GameEnd from "./components/GameEnd.svelte";
   import PageTransition from "./components/PageTransition.svelte";
+  import DSGVO from "./components/DSGVO.svelte";
+  import Footer from "./components/Footer.svelte";
 
   let roomHandler;
 
@@ -87,3 +89,5 @@
     </PageTransition>
   {/if}
 {/if}
+<DSGVO />
+<Footer />
