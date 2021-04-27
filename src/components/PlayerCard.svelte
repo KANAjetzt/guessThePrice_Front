@@ -42,6 +42,8 @@
             border: "playerCard",
           }}
           showCheckIcon={guessedPrice !== 0 && $appStore.currentRoom === "game"}
+          showBtnExit={!$roomState.gameEnded &&
+            id === $appStore.currentPlayer.id}
         />
       </div>
       <caption

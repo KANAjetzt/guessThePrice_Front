@@ -1,27 +1,23 @@
 <script>
-  import { createEventDispatcher } from "svelte";
-  import { deleteLS } from "../utils/localStorageHandler";
   import { roomStore, roomState, appStore } from "../stores";
   import RunningIcon from "./Icons/Running.svelte";
+  import MakeSure from "./MakeSure.svelte";
 
-  const dispatch = createEventDispatcher();
+  export let style = "";
 </script>
 
 <button
-  class="exitBtn"
+  class={`exitBtn exitBtn--${style}`}
   on:click={() => {
-    // Delete all LS data
-    deleteLS("sessionData");
-    // Leave current lobby
-    $roomStore.leave();
-    // Refresh the page
-    location.reload();
+    $appStore.makeSureIsOpen = true;
   }}
 >
   <div class="icon">
     <RunningIcon width={12} height={18} fill={"black"} />
   </div>
 </button>
+
+<MakeSure />
 
 <style>
   .exitBtn {
@@ -33,6 +29,11 @@
     background-color: var(--color-3);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+  }
+
+  .exitBtn--avatar {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .exitBtn:hover,

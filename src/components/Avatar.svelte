@@ -2,10 +2,12 @@
   import { fly } from "svelte/transition";
   import { roomState, roomStore, appStore } from "../stores";
   import BtnReload from "./BtnReload.svelte";
+  import BtnExit from "./BtnExit.svelte";
   import Check2 from "./Icons/Check2.svelte";
 
   export let showCheckIcon = false;
   export let showBtnReload = false;
+  export let showBtnExit = false;
   export let style = {
     // smallBorder / gameEnd
     avatar: "",
@@ -45,6 +47,11 @@
     {#if showCheckIcon}
       <div class="checkIcon" in:fly|local={{ duration: 200, x: -50 }}>
         <Check2 shadow={false} fill={"#23c7d9"} />
+      </div>
+    {/if}
+    {#if showBtnExit}
+      <div class="btnExit">
+        <BtnExit style={"avatar"} />
       </div>
     {/if}
   </div>
@@ -117,5 +124,10 @@
     position: absolute;
     bottom: -1rem;
     right: -1rem;
+  }
+  .btnExit {
+    position: absolute;
+    bottom: -1rem;
+    left: -1rem;
   }
 </style>

@@ -12,6 +12,8 @@ export const appStore = writable({
   currentPlayer: undefined,
   lightboxIsOpen: false,
   DSGVOisOpen: false,
+  makeSureIsOpen: false,
+  btnExitPlayerIsSure: false,
   galleryClickedImage: undefined,
 });
 
