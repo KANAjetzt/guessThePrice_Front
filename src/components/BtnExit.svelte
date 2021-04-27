@@ -1,7 +1,6 @@
 <script>
   import { roomStore, roomState, appStore } from "../stores";
   import RunningIcon from "./Icons/Running.svelte";
-  import MakeSure from "./MakeSure.svelte";
 
   export let style = "";
 </script>
@@ -16,8 +15,6 @@
     <RunningIcon width={12} height={18} fill={"black"} />
   </div>
 </button>
-
-<MakeSure />
 
 <style>
   .exitBtn {

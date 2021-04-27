@@ -10,6 +10,7 @@
   import GameEnd from "./components/GameEnd.svelte";
   import PageTransition from "./components/PageTransition.svelte";
   import DSGVO from "./components/DSGVO.svelte";
+  import MakeSure from "./components/MakeSure.svelte";
   import Footer from "./components/Footer.svelte";
 
   let roomHandler;
@@ -60,6 +61,11 @@
 </script>
 
 <RoomHandler bind:this={roomHandler} />
+
+<!-- Modals -->
+<DSGVO />
+<MakeSure />
+
 {#if roomHandler}
   {#if $appStore.currentRoom === "characterCreation"}
     <PageTransition>
@@ -89,5 +95,4 @@
     </PageTransition>
   {/if}
 {/if}
-<DSGVO />
 <Footer />
