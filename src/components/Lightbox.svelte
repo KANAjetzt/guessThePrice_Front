@@ -40,7 +40,7 @@
             x: isLeftBtnClick ? slideRight : slideLeft,
             easing: quintOut,
           }}
-          out:fly={{
+          out:fly|local={{
             duration: 500,
             x: isLeftBtnClick ? slideLeft : slideRight,
             easing: quintOut,
