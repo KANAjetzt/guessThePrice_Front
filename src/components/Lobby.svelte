@@ -8,6 +8,7 @@
   import BtnStart from "./BtnStart.svelte";
   import Loader from "./Loader.svelte";
   import BtnExit from "./BtnExit.svelte";
+  import BtnCharacter from "./BtnCharacter.svelte";
 
   const startGame = async () => {
     await $roomStore.send("startGame");
@@ -24,8 +25,9 @@
     </section>
     <section class="btnPannel">
       <BtnPannel>
-        <div class="btnExit">
+        <div class="btnSecondary">
           <BtnExit />
+          <BtnCharacter />
         </div>
         <div class="btnMain">
           <BtnInviteLink />
@@ -58,14 +60,17 @@
     align-self: end;
   }
 
-  .btnExit {
+  .btnSecondary {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    column-gap: 1rem;
     grid-column: 1 / 3;
     grid-row: 2 / 3;
     justify-self: center;
   }
 
-  @media only screen and (min-width: 25em) {
-    .btnExit {
+  @media only screen and (min-width: 40em) {
+    .btnSecondary {
       grid-column: 1 / 2;
       grid-row: 1 / 2;
       justify-self: center;
@@ -80,7 +85,7 @@
     grid-column: 1 / 3;
   }
 
-  @media only screen and (min-width: 25em) {
+  @media only screen and (min-width: 40em) {
     .btnMain {
       justify-self: center;
       grid-column: 2 / 3;

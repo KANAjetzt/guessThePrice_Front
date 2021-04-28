@@ -18,7 +18,7 @@
     row-gap: 3rem;
   }
 
-  @media only screen and (min-width: 25em) {
+  @media only screen and (min-width: 40em) {
     .btnPannel {
       padding: 2rem 2rem 3rem 2rem;
       row-gap: unset;
