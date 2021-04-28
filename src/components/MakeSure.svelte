@@ -11,7 +11,7 @@
     // Leave current lobby
     $roomStore.leave();
     // Refresh the page
-    location.reload();
+    window.location.assign("/");
   };
 
   const handleIsNotSure = () => {
