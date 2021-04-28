@@ -4,8 +4,10 @@
   import BtnReload from "./BtnReload.svelte";
   import BtnExit from "./BtnExit.svelte";
   import Check2 from "./Icons/Check2.svelte";
+  import WifiOff from "./Icons/WifiOff.svelte";
 
   export let showCheckIcon = false;
+  export let showDisconnectedIcon = false;
   export let showBtnReload = false;
   export let showBtnExit = false;
   export let style = {
@@ -47,6 +49,11 @@
     {#if showCheckIcon}
       <div class="checkIcon" in:fly|local={{ duration: 200, x: -50 }}>
         <Check2 shadow={false} fill={"#23c7d9"} />
+      </div>
+    {/if}
+    {#if showDisconnectedIcon}
+      <div class="disconnectedIcon" in:fly|local={{ duration: 200, x: -50 }}>
+        <WifiOff shadow={false} fill={"#23c7d9"} />
       </div>
     {/if}
     {#if showBtnExit}
@@ -106,6 +113,12 @@
     position: absolute;
     bottom: -0.3rem;
     right: -2.3rem;
+  }
+
+  .disconnectedIcon {
+    position: absolute;
+    bottom: -0.3rem;
+    left: -1.7rem;
   }
 
   @media only screen and (min-width: 62.5em) {

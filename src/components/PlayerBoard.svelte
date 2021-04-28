@@ -46,6 +46,7 @@
           guessedPrice={player[1].guessedPrice}
           score={player[1].score}
           winner={player[1].winner}
+          connected={player[1].connected}
         />
       </div>
     {/each}

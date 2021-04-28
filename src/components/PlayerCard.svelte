@@ -13,6 +13,7 @@
   export let score = 0;
   export let guessedPrice = 0;
   export let winner = false;
+  export let connected = true;
 
   let showRoundScore = true;
   let style;
@@ -30,7 +31,7 @@
 </script>
 
 {#if !winner}
-  <div class={"playerCard"}>
+  <div class={`playerCard ${!connected ? "playerCard--disconnected" : ""}`}>
     <div class="playerInfo">
       <div class="avatar">
         <Avatar
@@ -42,6 +43,7 @@
             border: "playerCard",
           }}
           showCheckIcon={guessedPrice !== 0 && $appStore.currentRoom === "game"}
+          showDisconnectedIcon={!connected}
           showBtnExit={!$roomState.gameEnded &&
             id === $appStore.currentPlayer.id}
         />
@@ -88,7 +90,14 @@
     background-image: var(--color-gradient-1--90deg);
     padding: 1.2rem 1.4rem 1rem 1.4rem;
     box-shadow: var(--shadow-3);
+    transition: all 0.2s ease-out;
   }
+
+  .playerCard--disconnected {
+    filter: saturate(0.8);
+    opacity: 0.8;
+  }
+
   .playerInfo {
     grid-column: 1 / 2;
     display: flex;
