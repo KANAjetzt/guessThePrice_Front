@@ -5,9 +5,13 @@
 
 <div class="playerList">
   {#each [...$roomState.playerStates.$items].map((player) => player[1]) as player}
-    <div class="player">
+    <div class={`player ${!player.connected ? "player--disconnected" : ""}`}>
       <div class="avatar">
-        <Avatar style={{ avatar: "", border: "" }} img={player.avatar} />
+        <Avatar
+          style={{ avatar: "", border: "" }}
+          img={player.avatar}
+          showDisconnectedIcon={!player.connected}
+        />
       </div>
       <caption class="name">{player.name}</caption>
     </div>
@@ -31,6 +35,12 @@
     padding: 1rem;
     width: 10rem;
   }
+
+  .player--disconnected {
+    filter: saturate(0.6);
+    opacity: 0.8;
+  }
+
   .avatar {
     width: 5.3rem;
     height: 5.3rem;
