@@ -102,7 +102,7 @@
     }
     .playerBoard {
       grid-column: 1 / 2;
-      grid-row: 2 / -1;
+      grid-row: 2 / 3;
     }
     section {
       grid-column: 2 / 3;
