@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
   import { cubicInOut, cubicOut } from "svelte/easing";
   import { fade, fly } from "svelte/transition";
@@ -13,9 +14,11 @@
   export let score = 0;
   export let guessedPrice = 0;
   export let winner = false;
+  export let connected = true;
 
   let showRoundScore = true;
   let style;
+  let width;
 
   appStore.subscribe((data) => {
     style = data.currentRoom === "gameEnd" ? "gameEnd" : "";
@@ -27,11 +30,41 @@
   });
 
   $: tweenedScore.set(score);
+
+  onMount(() => {
+    // if subgrid is support skip all of this
+    if ($appStore.subgridSupported) return;
+
+    // Get the width of all playerInfos
+    const playerInfoWidth = Array.from(
+      document.querySelectorAll(".playerInfo")
+    ).map((playerInfo) => playerInfo.getBoundingClientRect().width);
+
+    // Get the highest width
+    const playerInfoMaxWidth = playerInfoWidth.reduce((acc, cur) => {
+      return acc < cur ? (acc = cur) : (acc = acc);
+    }, 0);
+
+    // Save the highest width in appStore
+    $appStore.playerInfoMaxWidth = playerInfoMaxWidth;
+
+    // Set the highest width as css variable
+    document.documentElement.style.setProperty(
+      "--playerInfoMaxWidth",
+      `${playerInfoMaxWidth}px`
+    );
+  });
 </script>
 
 {#if !winner}
-  <div class={"playerCard"}>
-    <div class="playerInfo">
+  <div
+    class={`playerCard ${!connected ? "playerCard--disconnected" : ""} ${
+      width < $appStore.playerInfoMaxWidth && !$appStore.subgridSupported
+        ? "playerCard--smaller"
+        : ""
+    }`}
+  >
+    <div class="playerInfo" bind:offsetWidth={width}>
       <div class="avatar">
         <Avatar
           img={avatar}
@@ -42,6 +75,9 @@
             border: "playerCard",
           }}
           showCheckIcon={guessedPrice !== 0 && $appStore.currentRoom === "game"}
+          showDisconnectedIcon={!connected}
+          showBtnExit={!$roomState.gameEnded &&
+            id === $appStore.currentPlayer.id}
         />
       </div>
       <caption
@@ -81,11 +117,28 @@
 <style>
   .playerCard {
     display: grid;
+    /* grid-template-columns: min-content 1fr min-content; */
     grid-template-columns: min-content 1fr min-content;
     align-items: center;
     background-image: var(--color-gradient-1--90deg);
     padding: 1.2rem 1.4rem 1rem 1.4rem;
     box-shadow: var(--shadow-3);
+    transition: all 0.2s ease-out;
+  }
+
+  @supports (grid-template-columns: subgrid) {
+    .playerCard {
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
+    }
+  }
+  .playerCard--smaller {
+    grid-template-columns: var(--playerInfoMaxWidth) 1fr min-content;
+  }
+
+  .playerCard--disconnected {
+    filter: saturate(0.8);
+    opacity: 0.8;
   }
   .playerInfo {
     grid-column: 1 / 2;
@@ -127,6 +180,14 @@
 
   .stats--gameEnd {
     grid-template-columns: min-content 1fr;
+  }
+
+  @supports (grid-template-columns: subgrid) {
+    .stats,
+    .stats--gameEnd {
+      grid-column: 2 / 3;
+      justify-self: end;
+    }
   }
 
   p {

@@ -9,6 +9,9 @@
   import BetweenRounds from "./components/BetweenRounds.svelte";
   import GameEnd from "./components/GameEnd.svelte";
   import PageTransition from "./components/PageTransition.svelte";
+  import DSGVO from "./components/DSGVO.svelte";
+  import MakeSure from "./components/MakeSure.svelte";
+  import Footer from "./components/Footer.svelte";
 
   let roomHandler;
 
@@ -54,10 +57,21 @@
   onMount(async () => {
     // Connect to game room and listen for state change
     await roomHandler.handleRoom();
+
+    // Check if subgrid is supported
+    $appStore.subgridSupported = CSS.supports(
+      "grid-template-columns",
+      "subgrid"
+    );
   });
 </script>
 
 <RoomHandler bind:this={roomHandler} />
+
+<!-- Modals -->
+<DSGVO />
+<MakeSure />
+
 {#if roomHandler}
   {#if $appStore.currentRoom === "characterCreation"}
     <PageTransition>
@@ -87,3 +101,4 @@
     </PageTransition>
   {/if}
 {/if}
+<Footer />

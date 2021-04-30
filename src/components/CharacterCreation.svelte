@@ -18,7 +18,7 @@
 </script>
 
 {#if $roomState}
-  <div class="characterCreation">
+  <main class="characterCreation">
     <div class="playerCreation">
       <div class="avatar">
         <Avatar showBtnReload={true} />
@@ -27,7 +27,7 @@
     </div>
 
     <BtnStart on:click={handleStartBtn} />
-  </div>
+  </main>
 {:else}
   <Loader style={"fullPageCentered"} />
 {/if}
@@ -35,10 +35,11 @@
 <style>
   .characterCreation {
     display: grid;
-    grid-template-rows: 1fr min-content;
+    grid-template-rows: max-content min-content;
     justify-items: center;
     gap: 20vh;
     padding-top: 15vh;
+    min-height: 100vh;
   }
 
   @media only screen and (min-width: 62.5em) {

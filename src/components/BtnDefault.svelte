@@ -15,6 +15,7 @@
     position: relative;
     font-weight: 700;
     display: flex;
+    align-items: center;
     justify-content: center;
     background-color: var(--color-3);
     border: none;

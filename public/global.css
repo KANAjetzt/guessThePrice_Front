@@ -72,6 +72,9 @@
   --shadow-4: 0px 4px 8px hsla(220, 56%, 15%, 0.35);
   /* GuessedPricePanel */
   --shadow-4--negative: 0px -4px 8px hsla(220, 56%, 15%, 0.35);
+
+  /* -- Others -- */
+  --playerInfoMaxWidth: 0px;
 }
 
 *,
@@ -115,7 +118,9 @@ p,
 label,
 input,
 caption,
-span {
+span,
+ul,
+li {
   font-family: var(--baseFont);
   color: var(--color-font-1);
 }
@@ -153,6 +158,11 @@ p,
 label {
   font-size: var(--baseFontSize);
   max-width: 70ch;
+}
+
+a {
+  font-family: var(--baseFont);
+  color: var(--color-3);
 }
 
 /* If the font-size is below 16px mobile browsers zoom in on inputs */

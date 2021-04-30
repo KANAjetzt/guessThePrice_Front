@@ -5,9 +5,10 @@
   import BtnClose from "./BtnClose.svelte";
 
   export let backgroundImage = undefined;
+  export let name;
 
   onMount(() => {
-    $appStore.modalIsOpen = true;
+    $appStore[name] = true;
   });
 </script>
 
@@ -16,7 +17,7 @@
   in:fade|local={{ duration: 200 }}
   out:fade|local={{ delay: 200, duration: 200 }}
   on:click|self={() => {
-    $appStore.modalIsOpen = false;
+    $appStore[name] = false;
   }}
 >
   <div
@@ -35,7 +36,7 @@
     <div class="btnRemove">
       <BtnClose
         on:click={() => {
-          $appStore.modalIsOpen = false;
+          $appStore[name] = false;
         }}
       />
     </div>

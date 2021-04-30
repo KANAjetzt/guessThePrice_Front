@@ -20,5 +20,6 @@
   h2 {
     font-weight: 500;
     font-size: var(--heading-4);
+    overflow-wrap: anywhere;
   }
 </style>

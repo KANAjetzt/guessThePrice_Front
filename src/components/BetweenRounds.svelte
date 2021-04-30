@@ -43,9 +43,10 @@
   .betweenRounds {
     display: grid;
     grid-template-columns: max-content 1fr;
-    grid-template-rows: 1fr;
+    grid-auto-rows: max-content;
     max-width: 100vw;
     justify-items: center;
+    min-height: 100vh;
   }
 
   .roundCounter {

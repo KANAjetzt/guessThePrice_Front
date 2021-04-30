@@ -1,5 +1,5 @@
 <script>
-  import { fly } from "svelte/transition";
+  import { fly, fade } from "svelte/transition";
   import { roomState, roomStore, appStore } from "../stores";
   import BtnDefault from "./BtnDefault.svelte";
   import LinkIcon from "./Icons/Link.svelte";
@@ -23,13 +23,15 @@
 </script>
 
 <BtnDefault on:click={handleInviteLink}>
-  <div class="linkIcon">
-    <LinkIcon />
-  </div>
   {#if !isCoppyed}
+    <div class="linkIcon">
+      <LinkIcon />
+    </div>
     <span>EINLADEN</span>
   {:else}
-    <span>Link kopiert 👍</span>
+    <span in:fade|local={{ duration: 200 }}
+      >Link kopiert <span role="img" aria-label="Daumen hoch">👍</span></span
+    >
   {/if}
 </BtnDefault>
 {#if isCoppyError}
