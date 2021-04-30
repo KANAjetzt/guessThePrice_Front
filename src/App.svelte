@@ -57,6 +57,12 @@
   onMount(async () => {
     // Connect to game room and listen for state change
     await roomHandler.handleRoom();
+
+    // Check if subgrid is supported
+    $appStore.subgridSupported = CSS.supports(
+      "grid-template-columns",
+      "subgrid"
+    );
   });
 </script>
 

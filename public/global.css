@@ -72,6 +72,9 @@
   --shadow-4: 0px 4px 8px hsla(220, 56%, 15%, 0.35);
   /* GuessedPricePanel */
   --shadow-4--negative: 0px -4px 8px hsla(220, 56%, 15%, 0.35);
+
+  /* -- Others -- */
+  --playerInfoMaxWidth: 0px;
 }
 
 *,

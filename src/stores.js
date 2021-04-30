@@ -15,6 +15,8 @@ export const appStore = writable({
   makeSureIsOpen: false,
   btnExitPlayerIsSure: false,
   galleryClickedImage: undefined,
+  playerInfoMaxWidth: 0,
+  subgridSupported: undefined,
 });
 
 // Cannot read property 'score' of undefined --> da war ich gestern
