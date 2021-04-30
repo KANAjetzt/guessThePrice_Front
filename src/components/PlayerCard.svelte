@@ -85,12 +85,20 @@
 <style>
   .playerCard {
     display: grid;
-    grid-template-columns: min-content 1fr min-content;
+    /* grid-template-columns: min-content 1fr min-content; */
+    grid-template-columns: 13rem 1fr min-content;
     align-items: center;
     background-image: var(--color-gradient-1--90deg);
     padding: 1.2rem 1.4rem 1rem 1.4rem;
     box-shadow: var(--shadow-3);
     transition: all 0.2s ease-out;
+  }
+
+  @supports (grid-template-columns: subgrid) {
+    .playerCard {
+      grid-template-columns: subgrid;
+      grid-column: 1 / -1;
+    }
   }
 
   .playerCard--disconnected {
@@ -138,6 +146,14 @@
 
   .stats--gameEnd {
     grid-template-columns: min-content 1fr;
+  }
+
+  @supports (grid-template-columns: subgrid) {
+    .stats,
+    .stats--gameEnd {
+      grid-column: 2 / 3;
+      justify-self: end;
+    }
   }
 
   p {
