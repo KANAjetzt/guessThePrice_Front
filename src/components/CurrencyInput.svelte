@@ -85,6 +85,12 @@
     box-shadow: var(--shadow-4--negative);
   }
 
+  @supports not (backdrop-filter: blur(4px)) {
+    .currencyInput {
+      background-color: var(--color-1);
+    }
+  }
+
   @media only screen and (min-width: 180em) {
     .currencyInput {
       background-color: unset;
