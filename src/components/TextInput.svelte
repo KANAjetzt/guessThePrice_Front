@@ -7,7 +7,6 @@
   const handleRandomNameReload = async () => {
     // Send random name cange message to BE
     await $roomStore.send("randomNameChange");
-    console.log("randomNameChange");
   };
 </script>
 
