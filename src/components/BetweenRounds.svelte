@@ -4,9 +4,6 @@
   import Currency from "./Currency.svelte";
   import RoundCounter from "./RoundCounter.svelte";
   import ProductTitle from "./ProductTitle.svelte";
-  // Removed Carousel because it dosen't want to fit in
-  // with the PlayerBoard on the left :(
-  import Carousel from "./Carousel.svelte";
 </script>
 
 <main class="betweenRounds">

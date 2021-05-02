@@ -46,7 +46,7 @@
     }, 0);
 
     // Save the highest width in appStore
-    $appStore.playerInfoMaxWidth = playerInfoMaxWidth;
+    $appStore.playerInfoMaxWidth = Math.round(playerInfoMaxWidth);
 
     // Set the highest width as css variable
     document.documentElement.style.setProperty(
@@ -59,7 +59,7 @@
 {#if !winner}
   <div
     class={`playerCard ${!connected ? "playerCard--disconnected" : ""} ${
-      width < $appStore.playerInfoMaxWidth && !$appStore.subgridSupported
+      width <= $appStore.playerInfoMaxWidth && !$appStore.subgridSupported
         ? "playerCard--smaller"
         : ""
     }`}

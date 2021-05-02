@@ -58,6 +58,12 @@
     justify-content: center;
   }
 
+  @supports not (backdrop-filter: blur(4px)) {
+    .backdrop {
+      background-color: var(--color-1);
+    }
+  }
+
   .modal {
     display: grid;
     grid-template-columns: 1fr;

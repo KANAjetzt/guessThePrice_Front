@@ -2,10 +2,8 @@
   import { onMount } from "svelte";
   import { roomStore, roomState, appStore } from "../stores";
   import PlayerBoard from "./PlayerBoard.svelte";
-  import BtnSubmit from "./BtnSubmit.svelte";
   import Carousel from "./Carousel.svelte";
   import CurrencyInput from "./CurrencyInput.svelte";
-  import Gallery from "./Gallery.svelte";
   import ProductTitle from "./ProductTitle.svelte";
   import Info from "./Info.svelte";
   import GalleryV2 from "./GalleryV2.svelte";
@@ -32,11 +30,6 @@
       <!-- Images -->
       {#if $appStore.clientWidth > 535}
         <section class="gallery">
-          <!-- <Gallery>
-            {#each [...$roomState.currentProduct.imgs.$items.get(0).mediumImgs] as src, i}
-              <img {src} alt={`Productbild-${i}`} />
-            {/each}
-          </Gallery> -->
           <GalleryV2 />
         </section>
       {:else}

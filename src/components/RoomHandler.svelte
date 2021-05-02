@@ -6,18 +6,14 @@
   const client = new Colyseus.Client(svelteEnv.BackendUrl);
 
   const joinRoom = async (sessionData) => {
-    console.log(sessionData);
     let room;
     if (sessionData.sessionId && sessionData.roomId) {
-      console.log("reconnecting to Room");
       room = await client.reconnect(sessionData.roomId, sessionData.sessionId);
     }
     // Check if roomId is in URL --> /?c=1f0bbd3c1
     else if (sessionData.roomId) {
-      console.log("joining Room");
       room = await client.joinById(sessionData.roomId);
     } else {
-      console.log("creating Room");
       room = await client.create("my_room");
     }
 
@@ -63,14 +59,8 @@
       room = await joinRoom(sessionData);
     }
 
-    console.log(room.sessionId, "joined", room.name);
-
     // save sessionId and roomId to LS ( for possible reconnection )
     saveLS({ sessionId: room.sessionId, roomId: room.id }, "sessionData");
-
-    // delte LS when:
-    // - Game is over?
-    // - if the room dousen't exist!
 
     // store room object
     $roomStore = room;
@@ -93,17 +83,7 @@
     // listen to error
     // TODO: Add Toster and Fullpage Error Messages
     room.onMessage("error", (message) => {
-      console.log(message);
+      console.error(message);
     });
-
-    // console.log("starting Game!");
-    // await room.send("startGame");
-
-    // // Send guessed price to BE
-    // setTimeout(async () => {
-    //   await room.send("guessedPrice", {
-    //     guessedPrice: 2000,
-    //   });
-    // }, 500);
   };
 </script>

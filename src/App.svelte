@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
   import { roomStore, roomState, appStore } from "./stores";
-  import Head from "./components/Head.svelte";
   import RoomHandler from "./components/RoomHandler.svelte";
   import CharacterCreation from "./components/CharacterCreation.svelte";
   import Lobby from "./components/Lobby.svelte";
@@ -35,14 +34,6 @@
     }
 
     // Set currentPlayer in appStore
-    /* 
-      If the user is clicking on "back to Homepage",
-      handleBackToHomepage() on GameEnd leaves the current room
-      and connects to a new one.
-      Problem is the currentPlayer update is triggerd bevore 
-      the roomState is here so the filter retuns nothing.
-    */
-
     if ($roomState.playerStates) {
       const currentPlayer = [...$roomState.playerStates.$items].filter(
         (player) => player[1].id === $roomStore.sessionId
